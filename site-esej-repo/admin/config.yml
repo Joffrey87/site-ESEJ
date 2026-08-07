@@ -1,0 +1,30 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Dossier où seront déposées les images téléversées depuis /admin
+media_folder: "wp-content/uploads/cms"
+public_folder: "wp-content/uploads/cms"
+
+locale: "fr"
+
+collections:
+  - name: "pages"
+    label: "Pages du site"
+    files:
+      - name: "accueil"
+        label: "Page d'accueil"
+        file: "content/accueil.json"
+        format: "json"
+        fields:
+          - { name: "titre1", label: "Titre — 1re ligne (blanc)", widget: "string" }
+          - { name: "titre2", label: "Titre — 2e ligne (doré)", widget: "string" }
+          - { name: "intro", label: "Texte d'introduction (laisser une ligne vide entre deux paragraphes)", widget: "text" }
+          - { name: "bouton_label", label: "Bouton — texte", widget: "string" }
+          - { name: "bouton_lien", label: "Bouton — lien (ex : notre-ecole.html)", widget: "string" }
+          - { name: "atout1_titre", label: "Bloc 1 — titre", widget: "string" }
+          - { name: "atout1_texte", label: "Bloc 1 — texte", widget: "text" }
+          - { name: "atout2_titre", label: "Bloc 2 — titre", widget: "string" }
+          - { name: "atout2_texte", label: "Bloc 2 — texte", widget: "text" }
+          - { name: "atout3_titre", label: "Bloc 3 — titre", widget: "string" }
+          - { name: "atout3_texte", label: "Bloc 3 — texte", widget: "text" }

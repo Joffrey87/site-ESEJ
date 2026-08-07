@@ -1,0 +1,69 @@
+========================================================
+  COPIE DU SITE — ÉCOLE DU SAINT-ENFANT-JÉSUS
+========================================================
+
+Ce dossier est une copie complète et autonome de ton site.
+Elle ne dépend plus de WordPress ni du serveur d'origine.
+
+--------------------------------------------------------
+1) VOIR LE SITE
+--------------------------------------------------------
+Double-clique simplement sur le fichier « index.html ».
+Il s'ouvre dans ton navigateur, comme le site en ligne.
+Toutes les pages sont reliées entre elles (menu du haut).
+
+Pages incluses :
+  - index.html ............ Accueil
+  - notre-ecole.html ...... Notre école
+  - notre-projet.html ..... Notre projet
+  - nous-aider.html ....... Nous aider
+  - faq.html .............. FAQ
+  - contact.html .......... Contact
+  - don.html .............. Don
+  - mentions-legales.html . Mentions légales
+
+--------------------------------------------------------
+2) ACTIVER LE FORMULAIRE DE CONTACT (2 minutes)
+--------------------------------------------------------
+Le formulaire est prêt, il ne manque qu'une « clé » gratuite
+pour que les messages arrivent dans la boîte mail de l'école.
+
+  a. Va sur https://web3forms.com
+  b. Entre l'adresse : ecole@saint-enfant-jesus.fr
+     (les messages du formulaire y seront envoyés)
+  c. Tu reçois une « Access Key » par email (une suite de
+     lettres et chiffres).
+  d. Dans les fichiers « contact.html » ET « don.html »,
+     remplace le texte :   VOTRE_CLE_WEB3FORMS
+     par ta vraie clé.  (Ouvrir avec le Bloc-notes, puis
+     Édition > Remplacer.)
+
+C'est tout : le formulaire enverra les messages à l'école.
+
+--------------------------------------------------------
+3) LES DONS
+--------------------------------------------------------
+La page « don.html » affiche directement ton formulaire
+HelloAsso (association-remoise-pour-l-instruction-libre).
+Rien à configurer, il fonctionne tel quel.
+
+--------------------------------------------------------
+4) MODIFIER LES TEXTES / IMAGES
+--------------------------------------------------------
+- Textes : ouvre le fichier .html de la page avec un éditeur
+  (Bloc-notes, ou mieux : VS Code) et modifie le texte.
+- Images : elles sont dans le dossier
+  wp-content/uploads/  (remplace un fichier par un autre
+  du même nom pour changer une image).
+
+--------------------------------------------------------
+5) METTRE EN LIGNE
+--------------------------------------------------------
+Tu peux héberger ce dossier gratuitement (Netlify, GitHub
+Pages, etc.). Je peux m'en occuper avec toi quand tu veux.
+
+Bon à savoir : la police d'icônes décorative de Divi
+(ETmodules) n'est pas incluse (fichier propriétaire absent
+de l'export). L'icône du menu mobile a été recréée. Si tu
+veux les petites icônes réseaux sociaux d'origine, je peux
+les rebrancher via une bibliothèque libre.
