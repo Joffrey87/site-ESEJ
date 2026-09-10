@@ -1,4 +1,6 @@
-# Site École du Saint-Enfant-Jésus
+# Site de l'École du Saint-Enfant-Jésus
 
-Site statique + interface d administration Decap CMS (dossier /admin).
-Contenu editable dans /content. Images televersees dans /wp-content/uploads/cms.
+Site statique généré par `build.js` à partir de `content/` (édité via Decap CMS dans `/admin`).
+
+- `npm install && npm run build` → génère `dist/` (publié par Netlify, voir `netlify.toml` à la racine du dépôt).
+- Voir `LISEZ-MOI.txt` pour le mode d'emploi de l'administration.

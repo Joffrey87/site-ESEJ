@@ -1,0 +1,62 @@
+{
+  "slug": "faq",
+  "titre_menu": "FAQ",
+  "ordre": 5,
+  "afficher_menu": true,
+  "pied_de_page": false,
+  "ordre_pied": 0,
+  "gabarit": "standard",
+  "titre": "Foire aux",
+  "titre_accent": "questions",
+  "description": "Foire aux questions : cantine, périscolaire, horaires, uniforme…",
+  "afficher_appel_don": true,
+  "blocs": [
+    {
+      "type": "intro",
+      "titre": "Vos questions,",
+      "titre_accent": "nos réponses",
+      "texte": "#### \n\nRetrouvez toutes les réponses à vos questions !",
+      "image_fond": "wp-content/uploads/2025/12/pano-recre-02.jpg"
+    },
+    {
+      "type": "liste_promos",
+      "elements": [
+        {
+          "numero": "01",
+          "titre": "Y a-t-il une cantine ?",
+          "texte": "Non, l’école ne propose pas de cantine mais les élèves peuvent apporter leur panier repas dans des thermos chauds. Le déjeuner est encadré par des adultes qui aideront les élèves à ouvrir leur thermos, cependant les plats ne pourront pas être réchauffés. Les élèves peuvent aussi être externes.\n\n.\n\n&nbsp;",
+          "image": "wp-content/uploads/2025/12/carre-classe-04.jpg",
+          "image_alt": ""
+        },
+        {
+          "numero": "02",
+          "titre": "Y a-t-il du périscolaire ?",
+          "texte": "L’école propose un périscolaire le soir de 17h jusqu’à 18h, il est à la charge des parents. Si vous avez besoin d’un périscolaire le matin, n’hésitez pas à nous contacter : [ecole@saint-enfant-jesus.fr](mailto:ecole@saint-enfant-jesus.fr)",
+          "image": "wp-content/uploads/2025/12/carre-classe-06.jpg",
+          "image_alt": ""
+        },
+        {
+          "numero": "03",
+          "titre": "Quelles sont les horaires ?",
+          "texte": "Matin : ouverture de la grille dès 8h30, début des cours à 8h45\n\nDéjeuner : de 12h00 à 13h30\n\nAprès-midi : ouverture de la grille de 16h45 à 17h00",
+          "image": "wp-content/uploads/2025/12/carre-portrait-06.jpg",
+          "image_alt": ""
+        },
+        {
+          "numero": "04",
+          "titre": "Y a-t-il une remise à niveau pour l’utilisation de la méthode Singapour ?",
+          "texte": "Les maîtresses adapteront leur enseignement en début d’année pour que chaque élève puisse se mettre au niveau de cette nouvelle méthode d’apprentissage.",
+          "image": "wp-content/uploads/2025/12/carre-portrait-01.jpg",
+          "image_alt": ""
+        },
+        {
+          "numero": "05",
+          "titre": "Les élèves doivent-ils porter un uniforme ?",
+          "texte": "Oui, les enfants portent un uniforme, pour les maternelles, la blouse reste de mise et est portée au-dessus de l’uniforme.\n\nPour les garçons : un bermuda ou un pantalon marine, un col blanc et un pull bleu roi.\n\nPour les filles : une jupe ou une robe marine, un col blanc et un pull bleu roi.Il est demandé aux familles de réserver les baskets pour les cours d’EPS.\n\n&nbsp;",
+          "image": "wp-content/uploads/2025/12/carre-classe-08.jpg",
+          "image_alt": ""
+        }
+      ]
+    }
+  ]
+}

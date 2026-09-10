@@ -1,0 +1,22 @@
+{
+  "nom": "Ecole du Saint-Enfant-Jésus",
+  "logo": "wp-content/uploads/2025/11/esej-logo-titre.png",
+  "facebook": "https://www.facebook.com/saint.enfant.jesus",
+  "instagram": "https://www.instagram.com/saint.enfant.jesus/",
+  "pied_de_page": "© Ecole du Saint-Enfant-Jésus - Conception et réalisation ESEJ",
+  "adresse_nom": "Ecole du Saint-Enfant-Jésus",
+  "adresse_rue": "6 rue Colonel Charbonneaux",
+  "adresse_ville": "51000 REIMS",
+  "telephone": "06 69 64 62 69",
+  "email": "ecole@saint-enfant-jesus.fr",
+  "helloasso_url": "https://www.helloasso.com/associations/association-remoise-pour-l-instruction-libre/formulaires/1/widget",
+  "web3forms_key": "VOTRE_CLE_WEB3FORMS",
+  "formulaire_sujet": "Nouveau message depuis le site de l'école",
+  "carte_lat": 49.2707227,
+  "carte_lng": 4.007147,
+  "carte_zoom": 17,
+  "appel_don_titre": "Aidez-nous",
+  "appel_don_texte": "Pour les enfants, pour le bien, le beau, le vrai",
+  "appel_don_bouton": "Nous aider",
+  "appel_don_lien": "don.html"
+}

@@ -1,0 +1,67 @@
+{
+  "slug": "notre-ecole",
+  "titre_menu": "Notre école",
+  "ordre": 2,
+  "afficher_menu": true,
+  "pied_de_page": false,
+  "ordre_pied": 0,
+  "gabarit": "standard",
+  "titre": "Notre",
+  "titre_accent": "école",
+  "description": "Une école catholique libre fondée en 2022 par des parents, de la PS au CM2, à Reims.",
+  "afficher_appel_don": true,
+  "blocs": [
+    {
+      "type": "intro",
+      "titre": "Une école",
+      "titre_accent": "libre",
+      "texte": "École catholique fondée en 2022 par des parents, l’école du Saint-Enfant-Jésus a pour mission la formation intégrale de ses élèves (dimensions intellectuelle, spirituelle, physique et artistique). Nous avons à cœur de leur apprendre à utiliser leur libre-arbitre tout en cultivant leur capacité d’émerveillement, le tout en leur délivrant un enseignement complet et diversifié.\n\nNous voulons une école libre, libre de choisir ses enseignants, libre de choisir ses programmes et ses méthodes, tout cela dans le respect du socle commun de connaissances, de compétences et de culture demandé par l’Education Nationale. Et libres …. d’en faire un peu plus !\n\n[**Télécharger notre dossier d’inscription ici.**](wp-content/uploads/2026/06/Dossier-inscription-ESEJ-2026-2027.pdf \"Télécharger le document\")\n\nPour toute question liée à une inscription : [direction@saint-enfant-jesus.fr](mailto:direction@saint-enfant-jesus.fr).\n\n&nbsp;",
+      "image_fond": "wp-content/uploads/2025/11/pano-sortie-01.jpg"
+    },
+    {
+      "type": "texte_image",
+      "titre": "L’équipe",
+      "titre_accent": "pédagogique",
+      "texte": "Nos enseignantes sont qualifiées et continuent à se former. Nous avons actuellement 3 classes et accueillons tous les niveaux de maternelle et primaire. Nous avons la chance d’avoir en plus des intervenants qualifiés en anglais (dès la GS), chant et théâtre.",
+      "image": "wp-content/uploads/2025/11/carre-classe-01.jpg",
+      "image_alt": "",
+      "image_a_gauche": false,
+      "fond": "dore"
+    },
+    {
+      "type": "texte_image",
+      "titre": "L’",
+      "titre_accent": "aumônerie",
+      "texte": "Un chanoine du Christ-Roi Souverain Prêtre est présent tous les lundis dans notre école. Notre semaine peut ainsi commencer par la messe. Le chanoine Journé a à cœur d’insuffler une vie spirituelle à l’école, portée par des temps de prière quotidiens, l’enseignement du catéchisme et des évènements organisés au fil de l’année (pèlerinage de rentrée, consécration de l’école au Sacré-Cœur et au Cœur Immaculé de Marie, chemin de croix pendant le carême…).",
+      "image": "wp-content/uploads/2025/11/carre-aumonerie-01.jpg",
+      "image_alt": "",
+      "image_a_gauche": true,
+      "fond": "clair"
+    },
+    {
+      "type": "texte",
+      "titre": "Horaires de",
+      "titre_accent": "L’école",
+      "texte": "Les élèves ont cours de 8h45 à 12h puis de 13h30 à 16h45.\n\nLe portail est ouvert le matin dès 8h30 et ferme à 17h.\n\nDu périscolaire est proposé de 17h à 18h."
+    },
+    {
+      "type": "deux_colonnes",
+      "titre1": "Nos",
+      "titre_accent1": "Tarifs",
+      "texte1": "L’école du Saint-Enfant-Jésus est 100% libre et ne reçoit donc aucune subvention. Les frais de scolarité ne couvrent que 40% de nos dépenses, il nous est donc nécessaire de trouver des dons pour assurer un fonctionnement efficace et pérenne de l’école. Pour cela, nous demandons aux parents leur aide de plusieurs façons :\n\n- Le paiement des frais de scolarité sur 10 mois\n- Un engagement bénévole selon leurs possibilités : participation au marché de Noël, à la kermesse et autre évènements de l’école, surveillance de récréation entre midi et deux…\n- Une recherche de donateurs pour nous aider à financer ce beau projet !",
+      "titre2": "Coût de la",
+      "titre_accent2": "Scolarité",
+      "texte2": "Un enfant : 220€/mois soit 2 200€ l’année.  \nDeux enfants : 430€/mois soit 4 300€ l’année  \nTrois enfants : 630€/mois soit 6 300€ l’année.  \n-10€ par enfant supplémentaire.\n\nFrais d’inscription : 60€ par enfant, versés lorsque le dossier d’inscription est rendu à l’école.\n\n[**Télécharger le règlement financier 2026-2027 ici.**](wp-content/uploads/2026/06/Reglement-financier-2026-2027.pdf \"Télécharger le document\")"
+    },
+    {
+      "type": "texte_image",
+      "titre": "Nos",
+      "titre_accent": "locaux",
+      "texte": "Notre école est facilement accessible en transports en commun (bus), en voiture, à vélo ou à pied. Soucieux de toujours proposer un cadre agréable, nous sommes à la recherche d’un nouvel écrin pour notre école, à Reims, ou à proximité. N’hésitez pas à nous contacter : ecole@saint-enfant-jesus.fr",
+      "image": "wp-content/uploads/2025/11/carre-classe-02.jpg",
+      "image_alt": "",
+      "image_a_gauche": true,
+      "fond": "clair"
+    }
+  ]
+}

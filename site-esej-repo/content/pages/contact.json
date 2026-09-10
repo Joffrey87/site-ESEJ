@@ -1,0 +1,14 @@
+{
+  "slug": "contact",
+  "titre_menu": "Contact",
+  "ordre": 6,
+  "afficher_menu": true,
+  "pied_de_page": true,
+  "ordre_pied": 2,
+  "gabarit": "contact",
+  "titre": "Nous",
+  "titre_accent": "Contacter",
+  "description": "Contactez l'école du Saint-Enfant-Jésus à Reims.",
+  "contact_titre": "Contactez-nous",
+  "contact_texte": "Pour toute demande de renseignement, vous pouvez contacter l'école à l'aide de ce formulaire."
+}

@@ -1,0 +1,52 @@
+{
+  "slug": "notre-projet",
+  "titre_menu": "Notre projet",
+  "ordre": 3,
+  "afficher_menu": true,
+  "pied_de_page": false,
+  "ordre_pied": 0,
+  "gabarit": "standard",
+  "titre": "Notre",
+  "titre_accent": "Projet",
+  "description": "Notre pédagogie : l'éducation intégrale, en maternelle et au primaire.",
+  "afficher_appel_don": true,
+  "blocs": [
+    {
+      "type": "intro",
+      "titre": "Notre",
+      "titre_accent": "Pédagogie",
+      "texte": "L’école désire donner à chacun des connaissances sûres et structurées en transmettant une réelle **aptitude au raisonnement**. Elle aspire à nourrir une **culture générale de qualité**, tout en développant la créativité et l’esprit de contemplation par des activités manuelles, artistiques et sportives.\n\nCe projet pédagogique est dispensé par des professionnels le maîtrisant. Les méthodes choisies sont à même d’apporter aux enfants une véritable formation intellectuelle, physique et spirituelle.\n\n[**Télécharger notre projet pédagogique ici.**](wp-content/uploads/2026/06/Projet-pedagogique.pdf \"Télécharger le document\")",
+      "image_fond": "wp-content/uploads/2025/12/pano-classe-01.jpg"
+    },
+    {
+      "type": "texte_image",
+      "titre": "L’éducation",
+      "titre_accent": "intégrale",
+      "texte": "Outre le développement de l’intelligence des élèves, l’école se donne pour mission le **développement de l’enfant dans son intégralité**, comprenant les dimensions spirituelles, physiques, artistiques. Cela permet à chaque élève de grandir en cohérence et de révéler ses talents. Pour cela, les activités physiques sont portées par l’hébertisme et les activités artistiques sont développées au maximum par les maîtresses (dessin, chant, musique, théâtre, couture…)",
+      "image": "wp-content/uploads/2025/12/carre-recre-03.jpg",
+      "image_alt": "",
+      "image_a_gauche": false,
+      "fond": "clair"
+    },
+    {
+      "type": "texte_image",
+      "titre": "En maternelle",
+      "titre_accent": "",
+      "texte": "La pédagogie repose sur une **approche sensorielle** pour développer des apprentissages fondés sur le **concret** et la **manipulation**. Elle s’appuie sur des supports de cours adaptés à chaque niveau de maternelle qui privilégieront des ateliers d’activités manuelles, de graphisme, d’oralisation et de découverte du monde vivant. De plus, une éducation physique et motrice est dispensée quotidiennement. La méthode de lecture est **syllabique**. L’apprentissage des sons simples débute dès la PS. En GS, les sons complexes sont appris (lecture et écriture) afin d’aborder la lecture sereinement au CP.",
+      "image": "wp-content/uploads/2025/12/carre-classe-09.jpg",
+      "image_alt": "",
+      "image_a_gauche": true,
+      "fond": "dore"
+    },
+    {
+      "type": "texte_image",
+      "titre": "Le",
+      "titre_accent": "Primaire",
+      "texte": "#### La pédagogie dans son ensemble met l’accent sur :\n\n- le **raisonnement** et l’entraînement de la **mémoire** ;\n- l’élocution ;\n- la **présentation**, le soin ;\n- le respect des **consignes** ;\n- **le goût du travail fini et bien fait**.\n\n#### En français, l’accent est mis sur :\n\n- la **grammaire classique et analytique** ;\n- un enseignement complet et structuré de la conjugaison ;\n- une **application rigoureuse de l’orthographe**, de la syntaxe et de la ponctuation ;\n- la pratique régulière de la **dictée**, de la rédaction, des exercices d’écriture ;\n- la pratique régulière du **par cœur**, de la répétition et de la récitation ;\n- le développement d’un **vocabulaire riche et le goût de la lecture** ;\n- la connaissance de la **littérature française** classique.\n\n#### En mathématiques, la **méthode de Singapour** est suivie dès la maternelle. Elle permet d’apprendre les bases en se fondant sur les principes suivants :\n\n- les apprentissages se font **du concret vers l’abstrait** (concret – imagé -abstrait) ;\n- les notions abordées vont du simple vers le complexe ;\n- une notion doit être acquise totalement avant de passer aux suivantes.\n\n#### L’apprentissage de **l’anglais** se fait dès la GS à l’oral puis est combiné à l’écrit en CM.\n\n#### Un enseignement **chronologique** est dispensé en histoire.\n\n#### Un enseignement de la **géographie** française est prodigué dès la GS puis s’étend à l’Europe et enfin, au reste du monde.",
+      "image": "wp-content/uploads/2025/12/carre-classe-07.jpg",
+      "image_alt": "",
+      "image_a_gauche": true,
+      "fond": "clair"
+    }
+  ]
+}

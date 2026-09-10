@@ -1,0 +1,62 @@
+{
+  "slug": "nous-aider",
+  "titre_menu": "Nous aider",
+  "ordre": 4,
+  "afficher_menu": true,
+  "pied_de_page": false,
+  "ordre_pied": 0,
+  "gabarit": "standard",
+  "titre": "Nous",
+  "titre_accent": "aider",
+  "description": "Les moyens de nous aider : prières, dons, bénévolat.",
+  "afficher_appel_don": true,
+  "blocs": [
+    {
+      "type": "intro",
+      "titre": "Les moyens de",
+      "titre_accent": "nous aider",
+      "texte": "#### \n\n#### Faire un don en ligne\n\nPour participer au financement des travaux d’aménagement de nos locaux, vous pouvez faire un don directement ici. Un reçu fiscal vous sera automatiquement adressé dès votre don enregistré.\n\n#### Donner par chèque\n\nIl vous est également possible de nous faire parvenir votre don par voie postale, en adressant votre chèque à l’ordre de l’ARIL, accompagné d’un courrier précisant si vous souhaitez recevoir un reçu fiscal :\n\nARIL – Association Rémoise pour l’Instruction Libre  \n71, avenue Jean Jaurès  \n51100 Reims\n\nChaque don compte !",
+      "image_fond": "wp-content/uploads/2025/12/pano-activite-01.jpg"
+    },
+    {
+      "type": "liste_promos",
+      "elements": [
+        {
+          "numero": "01",
+          "titre": "Prières",
+          "texte": "La prière pour notre école, son personnel éducatif, ses élèves et ses familles, est l’aide la plus précieuse que vous puissiez nous apporter.\n\n&nbsp;",
+          "image": "wp-content/uploads/2025/12/carre-portrait-03.jpg",
+          "image_alt": ""
+        },
+        {
+          "numero": "02",
+          "titre": "Dons Particuliers (IR)",
+          "texte": "Les particuliers peuvent nous soutenir en effectuant un don en ligne. Chaque don est déductible à hauteur de 66% du montant de votre impôt sur le revenu (IR), dans la limite de 20 % de votre revenu imposable.",
+          "image": "wp-content/uploads/2025/12/carre-portrait-02.jpg",
+          "image_alt": ""
+        },
+        {
+          "numero": "03",
+          "titre": "Dons Entreprises (IS)",
+          "texte": "Les versements effectués par les entreprises assujetties à l’impôt sur les sociétés (IS) permettent de bénéficier d’une réduction d’IS de 60 % du montant versés, plafonnée à 20 000 € ou 0,5% du chiffre d’affaires annuel hors taxe de l’entreprise.",
+          "image": "wp-content/uploads/2025/12/carre-portrait-04.jpg",
+          "image_alt": ""
+        },
+        {
+          "numero": "04",
+          "titre": "Dons Particuliers (IFI)",
+          "texte": "Les particuliers peuvent également nous soutenir en effectuant un don au profit de l’École du Saint-Enfant-Jésus auprès de la Fondation pour l’école. Ces versements sont déductibles de l’Impôt sur la fortune immobilière à proportion de 75 % de leur montant, dans la limite de 50 000 €. Plus d’information sur le site de la fondation pour l’école ou nous contacter au 06 69 64 62 69.",
+          "image": "wp-content/uploads/2025/12/carre-recre-02.jpg",
+          "image_alt": ""
+        },
+        {
+          "numero": "05",
+          "titre": "Bénévolat",
+          "texte": "Le bénévolat est au cœur de la vie de l’école. Si vous souhaitez devenir bénévole, contactez-nous.\n\n&nbsp;",
+          "image": "wp-content/uploads/2025/12/carre-activite-01.jpg",
+          "image_alt": ""
+        }
+      ]
+    }
+  ]
+}

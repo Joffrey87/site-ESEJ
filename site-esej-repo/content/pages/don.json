@@ -1,0 +1,14 @@
+{
+  "slug": "don",
+  "titre_menu": "Don",
+  "ordre": 7,
+  "afficher_menu": true,
+  "pied_de_page": true,
+  "ordre_pied": 3,
+  "gabarit": "don",
+  "titre": "Don",
+  "titre_accent": "",
+  "description": "Faire un don à l'école du Saint-Enfant-Jésus.",
+  "contact_titre": "Contactez-nous",
+  "contact_texte": "Pour toute demande de renseignement, vous pouvez contacter l’école à l’aide de ce formulaire."
+}

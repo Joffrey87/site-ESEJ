@@ -1,69 +1,50 @@
 ========================================================
-  COPIE DU SITE — ÉCOLE DU SAINT-ENFANT-JÉSUS
+  SITE DE L'ÉCOLE DU SAINT-ENFANT-JÉSUS — MODE D'EMPLOI
 ========================================================
 
-Ce dossier est une copie complète et autonome de ton site.
-Elle ne dépend plus de WordPress ni du serveur d'origine.
+Le site est généré automatiquement à partir du contenu saisi dans
+l'interface d'administration. Vous n'avez jamais besoin de toucher au code.
 
 --------------------------------------------------------
-1) VOIR LE SITE
+1) MODIFIER LE SITE (interface d'administration)
 --------------------------------------------------------
-Double-clique simplement sur le fichier « index.html ».
-Il s'ouvre dans ton navigateur, comme le site en ligne.
-Toutes les pages sont reliées entre elles (menu du haut).
+Adresse : https://saint-enfant-jesus2.netlify.app/admin/
+Accès discrets depuis le site :
+  - le petit cadenas à la fin de la ligne « © … » en bas de page ;
+  - l'icône crayon qui apparaît au survol du coin haut-droit de la page.
+Connexion : email + mot de passe (compte partagé du conseil d'administration).
 
-Pages incluses :
-  - index.html ............ Accueil
-  - notre-ecole.html ...... Notre école
-  - notre-projet.html ..... Notre projet
-  - nous-aider.html ....... Nous aider
-  - faq.html .............. FAQ
-  - contact.html .......... Contact
-  - don.html .............. Don
-  - mentions-legales.html . Mentions légales
+Dans l'admin :
+  - « Réglages généraux » → Réglages du site : coordonnées, réseaux sociaux,
+    pied de page, don HelloAsso, formulaire de contact, bloc « Aidez-nous », carte.
+  - « Réglages généraux » → Page d'accueil : tous les textes et photos de l'accueil.
+  - « Pages » : chaque page du site. Bouton « Nouvelle page » pour en créer une
+    (choisir son adresse, son nom dans le menu, sa position, puis ajouter des blocs).
+    Pour supprimer une page : ouvrir la page → menu « … » → Supprimer.
+  - Les images se choisissent / se téléversent avec le bouton « Choisir une image ».
 
---------------------------------------------------------
-2) ACTIVER LE FORMULAIRE DE CONTACT (2 minutes)
---------------------------------------------------------
-Le formulaire est prêt, il ne manque qu'une « clé » gratuite
-pour que les messages arrivent dans la boîte mail de l'école.
-
-  a. Va sur https://web3forms.com
-  b. Entre l'adresse : ecole@saint-enfant-jesus.fr
-     (les messages du formulaire y seront envoyés)
-  c. Tu reçois une « Access Key » par email (une suite de
-     lettres et chiffres).
-  d. Dans les fichiers « contact.html » ET « don.html »,
-     remplace le texte :   VOTRE_CLE_WEB3FORMS
-     par ta vraie clé.  (Ouvrir avec le Bloc-notes, puis
-     Édition > Remplacer.)
-
-C'est tout : le formulaire enverra les messages à l'école.
+Après « Publier », le site se met à jour tout seul en 1 à 2 minutes
+(rafraîchir la page avec Ctrl+F5 si nécessaire).
 
 --------------------------------------------------------
-3) LES DONS
+2) TYPES DE BLOCS DISPONIBLES (pages standard)
 --------------------------------------------------------
-La page « don.html » affiche directement ton formulaire
-HelloAsso (association-remoise-pour-l-instruction-libre).
-Rien à configurer, il fonctionne tel quel.
+  - Introduction sur photo de fond (grand titre + texte dans un cadre blanc)
+  - Texte + image (image à gauche ou à droite, fond clair ou doré)
+  - Texte seul
+  - Deux colonnes de texte
+  - Liste numérotée avec images (questions/réponses, moyens d'aider…)
+  - Texte long (mentions légales, règlement…)
+Le bloc « Aidez-nous » se règle une fois pour toutes dans Réglages du site
+et s'affiche en bas des pages où l'option est cochée.
 
 --------------------------------------------------------
-4) MODIFIER LES TEXTES / IMAGES
+3) FONCTIONNEMENT TECHNIQUE (pour info)
 --------------------------------------------------------
-- Textes : ouvre le fichier .html de la page avec un éditeur
-  (Bloc-notes, ou mieux : VS Code) et modifie le texte.
-- Images : elles sont dans le dossier
-  wp-content/uploads/  (remplace un fichier par un autre
-  du même nom pour changer une image).
-
---------------------------------------------------------
-5) METTRE EN LIGNE
---------------------------------------------------------
-Tu peux héberger ce dossier gratuitement (Netlify, GitHub
-Pages, etc.). Je peux m'en occuper avec toi quand tu veux.
-
-Bon à savoir : la police d'icônes décorative de Divi
-(ETmodules) n'est pas incluse (fichier propriétaire absent
-de l'export). L'icône du menu mobile a été recréée. Si tu
-veux les petites icônes réseaux sociaux d'origine, je peux
-les rebrancher via une bibliothèque libre.
+  - content/          : le contenu (fichiers JSON modifiés par l'admin)
+  - templates/        : les gabarits HTML (enveloppe + blocs) — ne pas modifier
+  - assets/theme.css, assets/blocks.css : le style du site (Divi consolidé)
+  - build.js          : génère le site dans dist/ (exécuté par Netlify)
+  - admin/            : l'interface d'administration (Decap CMS)
+  - wp-content/uploads/ : les images (dossier cms/ = images ajoutées via l'admin)
+Hébergement : Netlify (déploiement automatique à chaque modification GitHub).

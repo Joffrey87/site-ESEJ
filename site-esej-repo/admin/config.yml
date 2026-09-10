@@ -1,30 +1,182 @@
+# Configuration de l'interface d'administration (Decap CMS)
+# Toute modification enregistrée ici est envoyée sur GitHub ; Netlify régénère le site en ~1 minute.
 backend:
   name: git-gateway
   branch: main
+  commit_messages:
+    create: "Admin : création de « {{slug}} » ({{collection}})"
+    update: "Admin : modification de « {{slug}} » ({{collection}})"
+    delete: "Admin : suppression de « {{slug}} » ({{collection}})"
+    uploadMedia: "Admin : ajout de l'image {{path}}"
+    deleteMedia: "Admin : suppression de l'image {{path}}"
 
-# Dossier des images televersees depuis /admin
+locale: "fr"
+site_url: "https://saint-enfant-jesus2.netlify.app"
+display_url: "https://saint-enfant-jesus2.netlify.app"
+logo_url: "https://saint-enfant-jesus2.netlify.app/wp-content/uploads/2025/11/esej-logo-titre.png"
+
+# Dossier où sont déposées les images téléversées depuis l'admin
 media_folder: "site-esej-repo/wp-content/uploads/cms"
 public_folder: "/wp-content/uploads/cms"
 
-locale: "fr"
+editor:
+  preview: false
 
 collections:
-  - name: "pages"
-    label: "Pages du site"
+  # ------------------------------------------------------------------ réglages généraux
+  - name: "reglages"
+    label: "Réglages généraux"
+    description: "Coordonnées, réseaux sociaux, pied de page, don, formulaire de contact, appel au don."
     files:
+      - name: "site"
+        label: "Réglages du site"
+        file: "site-esej-repo/content/site.json"
+        format: "json"
+        fields:
+          - { name: "nom", label: "Nom du site", widget: "string" }
+          - { name: "logo", label: "Logo (en-tête)", widget: "image", required: false }
+          - { name: "facebook", label: "Lien Facebook", widget: "string", required: false }
+          - { name: "instagram", label: "Lien Instagram", widget: "string", required: false }
+          - { name: "pied_de_page", label: "Texte du pied de page (ligne ©)", widget: "string" }
+          - { name: "adresse_nom", label: "Adresse — nom", widget: "string" }
+          - { name: "adresse_rue", label: "Adresse — rue", widget: "string" }
+          - { name: "adresse_ville", label: "Adresse — code postal et ville", widget: "string" }
+          - { name: "telephone", label: "Téléphone", widget: "string", required: false }
+          - { name: "email", label: "Email affiché", widget: "string" }
+          - { name: "carte_lat", label: "Carte — latitude", widget: "number", value_type: "float", step: 0.000001, required: false }
+          - { name: "carte_lng", label: "Carte — longitude", widget: "number", value_type: "float", step: 0.000001, required: false }
+          - { name: "carte_zoom", label: "Carte — zoom (13 = ville, 17 = rue)", widget: "number", value_type: "int", min: 10, max: 19, required: false }
+          - { name: "helloasso_url", label: "Don — adresse du formulaire HelloAsso (widget)", widget: "string", hint: "Adresse se terminant par /widget, fournie par HelloAsso." }
+          - { name: "web3forms_key", label: "Formulaire de contact — clé Web3Forms", widget: "string", hint: "Clé gratuite obtenue sur web3forms.com avec l'email de réception." }
+          - { name: "formulaire_sujet", label: "Formulaire de contact — sujet des emails reçus", widget: "string" }
+          - { name: "appel_don_titre", label: "Bloc « Aidez-nous » — titre", widget: "string" }
+          - { name: "appel_don_texte", label: "Bloc « Aidez-nous » — texte", widget: "string" }
+          - { name: "appel_don_bouton", label: "Bloc « Aidez-nous » — texte du bouton", widget: "string" }
+          - { name: "appel_don_lien", label: "Bloc « Aidez-nous » — lien du bouton", widget: "string", hint: "Ex. : don.html" }
+
       - name: "accueil"
         label: "Page d'accueil"
         file: "site-esej-repo/content/accueil.json"
         format: "json"
         fields:
-          - { name: "titre1", label: "Titre 1re ligne (blanc)", widget: "string" }
-          - { name: "titre2", label: "Titre 2e ligne (dore)", widget: "string" }
-          - { name: "intro", label: "Texte d'introduction (une ligne vide entre paragraphes)", widget: "text" }
-          - { name: "bouton_label", label: "Bouton - texte", widget: "string" }
-          - { name: "bouton_lien", label: "Bouton - lien (ex: notre-ecole.html)", widget: "string" }
-          - { name: "atout1_titre", label: "Bloc 1 - titre", widget: "string" }
-          - { name: "atout1_texte", label: "Bloc 1 - texte", widget: "text" }
-          - { name: "atout2_titre", label: "Bloc 2 - titre", widget: "string" }
-          - { name: "atout2_texte", label: "Bloc 2 - texte", widget: "text" }
-          - { name: "atout3_titre", label: "Bloc 3 - titre", widget: "string" }
-          - { name: "atout3_texte", label: "Bloc 3 - texte", widget: "text" }
+          - { name: "titre_menu", label: "Nom dans le menu", widget: "string", default: "Accueil" }
+          - { name: "titre", label: "Titre de l'onglet du navigateur", widget: "string" }
+          - { name: "description", label: "Description (référencement Google)", widget: "text", required: false }
+          - { name: "hero_titre", label: "Grand titre — 1re ligne (blanc)", widget: "string" }
+          - { name: "hero_titre_accent", label: "Grand titre — 2e ligne (doré)", widget: "string" }
+          - { name: "hero_texte", label: "Texte de bienvenue", widget: "markdown", buttons: ["bold", "italic", "link"], editor_components: [] }
+          - { name: "hero_bouton", label: "Bouton — texte", widget: "string" }
+          - { name: "hero_lien", label: "Bouton — lien", widget: "string", hint: "Ex. : notre-ecole.html" }
+          - { name: "hero_image", label: "Grande photo de droite", widget: "image" }
+          - { name: "zoom_titre", label: "Section « Zoom » — titre", widget: "string" }
+          - { name: "zoom_texte", label: "Section « Zoom » — texte", widget: "markdown", buttons: ["bold", "italic", "link"], editor_components: [] }
+          - { name: "atout1_titre", label: "Atout 1 — titre", widget: "string" }
+          - { name: "atout1_texte", label: "Atout 1 — texte", widget: "markdown", buttons: ["bold", "italic", "link"], editor_components: [] }
+          - { name: "atout2_titre", label: "Atout 2 — titre", widget: "string" }
+          - { name: "atout2_texte", label: "Atout 2 — texte", widget: "markdown", buttons: ["bold", "italic", "link"], editor_components: [] }
+          - { name: "atout3_titre", label: "Atout 3 — titre", widget: "string" }
+          - { name: "atout3_texte", label: "Atout 3 — texte", widget: "markdown", buttons: ["bold", "italic", "link"], editor_components: [] }
+          - { name: "photos_titre", label: "Section « Photos » — titre", widget: "string" }
+          - { name: "photos_texte", label: "Section « Photos » — texte", widget: "markdown", buttons: ["bold", "italic", "link"], editor_components: [] }
+          - { name: "photo1", label: "Photo 1 (grande, à gauche)", widget: "image" }
+          - { name: "photo1_alt", label: "Photo 1 — description", widget: "string", required: false }
+          - { name: "photo2", label: "Photo 2 (large, en haut à droite)", widget: "image" }
+          - { name: "photo2_alt", label: "Photo 2 — description", widget: "string", required: false }
+          - { name: "photo3", label: "Photo 3 (petite, en bas à gauche)", widget: "image" }
+          - { name: "photo3_alt", label: "Photo 3 — description", widget: "string", required: false }
+          - { name: "photo4", label: "Photo 4 (petite, en bas à droite)", widget: "image" }
+          - { name: "photo4_alt", label: "Photo 4 — description", widget: "string", required: false }
+          - { name: "mission_texte", label: "Phrase « Notre mission »", widget: "markdown", buttons: ["bold", "italic"], editor_components: [] }
+
+  # ------------------------------------------------------------------ pages
+  - name: "pages"
+    label: "Pages"
+    label_singular: "page"
+    description: "Toutes les pages du site (sauf l'accueil, dans Réglages généraux). Vous pouvez en créer, modifier, réordonner dans le menu ou supprimer."
+    folder: "site-esej-repo/content/pages"
+    create: true
+    format: "json"
+    extension: "json"
+    identifier_field: "titre_menu"
+    slug: "{{fields.slug}}"
+    summary: "{{titre_menu}}  —  {{slug}}.html  (menu : position {{ordre}})"
+    sortable_fields: ["ordre", "titre_menu"]
+    fields:
+      - { name: "slug", label: "Adresse de la page", widget: "string", pattern: ["^[a-z0-9-]+$", "Lettres minuscules, chiffres et tirets uniquement (ex. : nos-activites)"], hint: "Donne l'adresse : nos-activites → nos-activites.html. À choisir à la création, ne plus changer ensuite." }
+      - { name: "titre_menu", label: "Nom dans le menu", widget: "string" }
+      - { name: "ordre", label: "Position dans le menu (1 = premier après Accueil)", widget: "number", value_type: "int", default: 10 }
+      - { name: "afficher_menu", label: "Afficher dans le menu du haut", widget: "boolean", default: true }
+      - { name: "pied_de_page", label: "Afficher dans le menu du pied de page", widget: "boolean", default: false }
+      - { name: "ordre_pied", label: "Position dans le pied de page", widget: "number", value_type: "int", default: 10, required: false }
+      - { name: "gabarit", label: "Type de page", widget: "select", default: "standard",
+          options: [ { label: "Page standard (composée de blocs)", value: "standard" }, { label: "Page Contact (coordonnées + carte + formulaire)", value: "contact" }, { label: "Page Don (HelloAsso + formulaire)", value: "don" } ] }
+      - { name: "titre", label: "Titre de la page — partie bleue", widget: "string" }
+      - { name: "titre_accent", label: "Titre de la page — partie dorée", widget: "string", required: false }
+      - { name: "description", label: "Description (référencement Google)", widget: "text", required: false }
+      - { name: "afficher_appel_don", label: "Afficher le bloc « Aidez-nous » en bas de page", widget: "boolean", default: true }
+      - name: "blocs"
+        label: "Blocs de contenu (page standard)"
+        label_singular: "bloc"
+        widget: "list"
+        required: false
+        collapsed: true
+        summary: "{{fields.type}} — {{fields.titre}} {{fields.titre_accent}} {{fields.titre1}}"
+        types:
+          - name: "intro"
+            label: "Introduction sur photo de fond"
+            widget: "object"
+            fields:
+              - { name: "titre", label: "Titre — partie bleue", widget: "string" }
+              - { name: "titre_accent", label: "Titre — partie dorée", widget: "string", required: false }
+              - { name: "texte", label: "Texte", widget: "markdown" }
+              - { name: "image_fond", label: "Photo de fond (large, ex. 1400×800)", widget: "image", required: false }
+          - name: "texte_image"
+            label: "Texte + image"
+            widget: "object"
+            fields:
+              - { name: "titre", label: "Titre — partie bleue", widget: "string" }
+              - { name: "titre_accent", label: "Titre — partie dorée (ou blanche sur fond doré)", widget: "string", required: false }
+              - { name: "texte", label: "Texte", widget: "markdown" }
+              - { name: "image", label: "Image (carrée de préférence, ex. 800×800)", widget: "image" }
+              - { name: "image_alt", label: "Description de l'image", widget: "string", required: false }
+              - { name: "image_a_gauche", label: "Image à gauche du texte", widget: "boolean", default: false }
+              - { name: "fond", label: "Couleur de fond", widget: "select", default: "clair", options: [ { label: "Clair", value: "clair" }, { label: "Doré (texte blanc)", value: "dore" } ] }
+          - name: "texte"
+            label: "Texte seul"
+            widget: "object"
+            fields:
+              - { name: "titre", label: "Titre — partie bleue", widget: "string" }
+              - { name: "titre_accent", label: "Titre — partie dorée", widget: "string", required: false }
+              - { name: "texte", label: "Texte", widget: "markdown" }
+          - name: "deux_colonnes"
+            label: "Deux colonnes de texte"
+            widget: "object"
+            fields:
+              - { name: "titre1", label: "Colonne 1 — titre (bleu)", widget: "string" }
+              - { name: "titre_accent1", label: "Colonne 1 — titre (doré)", widget: "string", required: false }
+              - { name: "texte1", label: "Colonne 1 — texte", widget: "markdown" }
+              - { name: "titre2", label: "Colonne 2 — titre (bleu)", widget: "string" }
+              - { name: "titre_accent2", label: "Colonne 2 — titre (doré)", widget: "string", required: false }
+              - { name: "texte2", label: "Colonne 2 — texte", widget: "markdown" }
+          - name: "liste_promos"
+            label: "Liste numérotée avec images (questions/réponses, moyens d'aider…)"
+            widget: "object"
+            fields:
+              - name: "elements"
+                label: "Éléments"
+                label_singular: "élément"
+                widget: "list"
+                summary: "{{fields.numero}} {{fields.titre}}"
+                fields:
+                  - { name: "numero", label: "Numéro (laisser vide = automatique)", widget: "string", required: false }
+                  - { name: "titre", label: "Titre", widget: "string" }
+                  - { name: "texte", label: "Texte", widget: "markdown" }
+                  - { name: "image", label: "Image (carrée)", widget: "image" }
+                  - { name: "image_alt", label: "Description de l'image", widget: "string", required: false }
+          - name: "texte_long"
+            label: "Texte long (mentions légales, règlement…)"
+            widget: "object"
+            fields:
+              - { name: "texte", label: "Texte (utilisez les titres de niveau 2 pour les sections)", widget: "markdown" }
+      - { name: "contact_titre", label: "Pages Contact / Don — titre au-dessus du formulaire", widget: "string", required: false }
+      - { name: "contact_texte", label: "Pages Contact / Don — texte au-dessus du formulaire", widget: "markdown", required: false, buttons: ["bold", "italic", "link"], editor_components: [] }

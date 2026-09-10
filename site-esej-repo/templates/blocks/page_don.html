@@ -1,0 +1,50 @@
+<div class="et_pb_section esej-don-section0 et_section_regular">
+<div class="et_pb_row esej-don-row0">
+<div class="et_pb_column et_pb_column_4_4 esej-don-column0 et_pb_css_mix_blend_mode_passthrough et-last-child">
+<div class="et_pb_module et_pb_code esej-don-code0">
+<div class="et_pb_code_inner"><iframe allowtransparency="true" id="haWidget" scrolling="auto" src="{{helloasso_url}}" style="width: 100%; height:1000px; border: none;"></iframe></div>
+</div>
+</div>
+</div>
+</div><div class="et_pb_section esej-don-section1 et_animated et_pb_with_background et_section_regular">
+<div class="et_pb_row esej-don-row1 et_animated">
+<div class="et_pb_column et_pb_column_4_4 esej-don-column1 et_pb_css_mix_blend_mode_passthrough et-last-child">
+<div class="et_pb_module et_pb_text esej-don-text0 et_animated et_pb_text_align_center et_pb_bg_layout_light">
+<div class="et_pb_text_inner"><h2>{{contact_titre}}</h2></div>
+</div><div class="et_pb_module et_pb_text esej-don-text1 et_animated et_pb_text_align_center et_pb_bg_layout_light">
+<div class="et_pb_text_inner">{{{contact_texte}}}</div>
+</div>
+</div>
+</div><div class="et_pb_row esej-don-row2 et_animated">
+<div class="et_pb_column et_pb_column_4_4 esej-don-column2 et_pb_css_mix_blend_mode_passthrough et-last-child">
+<div class="et_pb_module esej-don-contactform0 et_animated et_pb_contact_form_container clearfix" data-form_unique_id="" data-form_unique_num="0" id="esej-don-contactform0">
+<div class="et-pb-contact-message"></div>
+<div class="et_pb_contact">
+<form action="https://api.web3forms.com/submit" class="esej_contact_form clearfix" id="esej-contact-form" method="post">
+<input name="access_key" type="hidden" value="{{web3forms_key}}"/>
+<input name="subject" type="hidden" value="{{formulaire_sujet}}"/>
+<input name="from_name" type="hidden" value="Site Ecole du Saint-Enfant-Jésus"/>
+<input autocomplete="off" name="botcheck" style="display:none !important" tabindex="-1" type="text"/>
+<p class="et_pb_contact_field et_pb_contact_field_0 et_pb_contact_field_last" data-id="nom" data-type="input">
+<label class="et_pb_contact_form_label" for="et_pb_contact_nom_0">Nom</label>
+<input class="input" data-field_type="input" data-original_id="nom" id="et_pb_contact_nom_0" name="nom" placeholder="Nom" required="" type="text" value=""/>
+</p><p class="et_pb_contact_field et_pb_contact_field_1 et_pb_contact_field_last" data-id="email" data-type="email">
+<label class="et_pb_contact_form_label" for="et_pb_contact_email_0">Courriel</label>
+<input class="input" data-field_type="email" data-original_id="email" id="et_pb_contact_email_0" name="email" placeholder="Courriel" required="" type="email" value=""/>
+</p><p class="et_pb_contact_field et_pb_contact_field_2 et_pb_contact_field_last" data-id="message" data-type="text">
+<label class="et_pb_contact_form_label" for="et_pb_contact_message_0">Message</label>
+<textarea class="et_pb_contact_message input" data-field_type="text" data-original_id="message" id="et_pb_contact_message_0" name="message" placeholder="Message" required=""></textarea>
+</p>
+<!-- champ WordPress retiré -->
+<div class="et_contact_bottom_container">
+<button class="et_pb_contact_submit et_pb_button" data-icon="E" name="et_builder_submit_button" type="submit">Envoyer</button>
+</div>
+<script>
+						(function(){var f=document.getElementById('esej-contact-form');if(!f)return;f.addEventListener('submit',function(e){e.preventDefault();var box=f.parentNode.parentNode.querySelector('.et-pb-contact-message');var btn=f.querySelector('button[type=submit]');if(btn){btn.disabled=true;}var data=new FormData(f);fetch('https://api.web3forms.com/submit',{method:'POST',body:data,headers:{'Accept':'application/json'}}).then(function(r){return r.json();}).then(function(j){if(j.success){f.style.display='none';if(box){box.innerHTML='<p style="padding:15px;background:#eafaf1;border:1px solid #2ecc71;border-radius:4px;">Merci, votre message a bien été envoyé.</p>';}}else{if(box){box.innerHTML='<p style="padding:15px;background:#fdecea;border:1px solid #e74c3c;border-radius:4px;">Une erreur est survenue, merci de réessayer.</p>';}if(btn){btn.disabled=false;}}}).catch(function(){if(box){box.innerHTML='<p style="padding:15px;background:#fdecea;border:1px solid #e74c3c;border-radius:4px;">Une erreur est survenue, merci de réessayer.</p>';}if(btn){btn.disabled=false;}});});})();
+						</script>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
