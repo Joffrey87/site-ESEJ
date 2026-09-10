@@ -10,5 +10,20 @@
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <!-- Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.3.3/dist/decap-cms.js"></script>
+  <script>
+    // Libellés en français : bouton de connexion du CMS et fenêtre Netlify Identity
+    if (window.netlifyIdentity && netlifyIdentity.setLocale) netlifyIdentity.setLocale('fr');
+    (function () {
+      var LABEL = 'Se connecter au compte Administrateur';
+      function relabel() {
+        document.querySelectorAll('button').forEach(function (b) {
+          var t = (b.textContent || '').trim();
+          if (/netlify identity/i.test(t) && t !== LABEL) b.textContent = LABEL;
+        });
+      }
+      new MutationObserver(relabel).observe(document.documentElement, { childList: true, subtree: true });
+      relabel();
+    })();
+  </script>
 </body>
 </html>
