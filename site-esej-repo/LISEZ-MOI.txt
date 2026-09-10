@@ -12,9 +12,23 @@ Adresse : https://saint-enfant-jesus2.netlify.app/admin/
 Accès discrets depuis le site :
   - le petit cadenas à la fin de la ligne « © … » en bas de page ;
   - l'icône crayon qui apparaît au survol du coin haut-droit de la page.
-Connexion : email + mot de passe (compte partagé du conseil d'administration).
+Connexion : e-mail + mot de passe. Le tableau de bord présente les pages en
+vignettes, les réglages, la médiathèque et (pour le compte Maître) les comptes.
 
-Dans l'admin :
+COMPTES ET RÔLES
+  - « Créer un nouveau compte administrateur » (écran de connexion) : chacun
+    choisit son nom, son e-mail et son mot de passe. Le compte est créé « en
+    attente » : il ne peut rien modifier tant que le trésorier ne l'a pas validé.
+  - Le compte Maître (trésorier) reçoit un e-mail à chaque inscription et
+    valide / refuse / suspend les comptes dans la rubrique « Comptes » du
+    tableau de bord.
+  - Rôles Netlify : maitre (trésorier), admin (peut tout modifier),
+    en_attente (aucun droit). Réglages Netlify à conserver : Identity →
+    Registration = Open ; Services → Git Gateway → Roles = admin, maitre ;
+    variable d'environnement WEB3FORMS_TRESORIER_KEY = clé Web3Forms créée
+    avec l'adresse e-mail du trésorier (pour la notification).
+
+Dans l'éditeur :
   - « Réglages généraux » → Réglages du site : coordonnées, réseaux sociaux,
     pied de page, don HelloAsso, formulaire de contact, bloc « Aidez-nous », carte.
   - « Réglages généraux » → Page d'accueil : tous les textes et photos de l'accueil.
@@ -46,5 +60,6 @@ et s'affiche en bas des pages où l'option est cochée.
   - assets/theme.css, assets/blocks.css : le style du site (Divi consolidé)
   - build.js          : génère le site dans dist/ (exécuté par Netlify)
   - admin/            : l'interface d'administration (Decap CMS)
-  - wp-content/uploads/ : les images (dossier cms/ = images ajoutées via l'admin)
+  - wp-content/uploads/ : les images (mediatheque/ = médiathèque de l'admin)
+  - netlify/functions/ : inscription (identity-signup) et gestion des comptes (comptes)
 Hébergement : Netlify (déploiement automatique à chaque modification GitHub).

@@ -134,6 +134,26 @@ for (const d of ['wp-content', 'wp-includes', 'assets', 'admin']) copyDir(path.j
 writePage('index', accueil.titre || 'Accueil', accueil.description, renderAccueil());
 for (const p of pages) writePage(p.slug, p.titre_menu || p.titre, p.description, renderPage(p));
 
+// données du tableau de bord d'administration (vignettes des pages)
+const abs = (u) => (u ? (/^(https?:)?\/\//.test(u) || u.startsWith('/') ? u : '/' + u) : '');
+function imagePage(p) {
+  for (const b of p.blocs || []) {
+    if (b.image) return b.image;
+    if (b.image_fond) return b.image_fond;
+    for (const el of b.elements || []) if (el.image) return el.image;
+  }
+  return '';
+}
+const gabaritLabel = { standard: 'Page standard', contact: 'Page contact', don: 'Page de don' };
+fs.writeFileSync(path.join(DIST, 'admin', 'pages.json'), JSON.stringify({
+  genere_le: new Date().toISOString(),
+  accueil: { titre: accueil.titre_menu || 'Accueil', sous_titre: 'Page d’accueil', image: abs(accueil.hero_image || site.logo), url: 'index.html' },
+  pages: pages.sort((a, b) => (a.ordre ?? 99) - (b.ordre ?? 99)).map((p) => ({
+    slug: p.slug, titre: p.titre_menu || p.titre, sous_titre: gabaritLabel[p.gabarit] || 'Page standard',
+    image: abs(imagePage(p) || site.logo), url: p.slug + '.html', dans_menu: p.afficher_menu !== false, blocs: (p.blocs || []).length,
+  })),
+}, null, 2));
+
 // page 404 sobre
 fs.writeFileSync(path.join(DIST, '404.html'), fill(shell, {
   site_nom: site.nom, site_logo: site.logo, facebook: site.facebook, instagram: site.instagram, pied_de_page: site.pied_de_page,

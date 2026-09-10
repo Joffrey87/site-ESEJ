@@ -15,9 +15,9 @@ site_url: "https://saint-enfant-jesus2.netlify.app"
 display_url: "https://saint-enfant-jesus2.netlify.app"
 logo_url: "https://saint-enfant-jesus2.netlify.app/wp-content/uploads/2025/11/esej-logo-titre.png"
 
-# Dossier où sont déposées les images téléversées depuis l'admin
-media_folder: "site-esej-repo/wp-content/uploads/cms"
-public_folder: "/wp-content/uploads/cms"
+# Médiathèque : toutes les images du site + celles ajoutées depuis l'admin
+media_folder: "site-esej-repo/wp-content/uploads/mediatheque"
+public_folder: "/wp-content/uploads/mediatheque"
 
 editor:
   preview: false

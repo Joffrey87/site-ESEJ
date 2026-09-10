@@ -1,7 +1,38 @@
 [build]
-  base    = "site-esej-repo"
-  command = "npm run build"
-  publish = "dist"
+  base      = "site-esej-repo"
+  command   = "npm run build"
+  publish   = "dist"
+  functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "20"
+
+# Anciennes adresses WordPress (avec / final) -> nouvelles pages, pour Google et les liens existants
+[[redirects]]
+  from = "/notre-ecole/"
+  to = "/notre-ecole.html"
+  status = 301
+[[redirects]]
+  from = "/notre-projet/"
+  to = "/notre-projet.html"
+  status = 301
+[[redirects]]
+  from = "/nous-aider/"
+  to = "/nous-aider.html"
+  status = 301
+[[redirects]]
+  from = "/faq/"
+  to = "/faq.html"
+  status = 301
+[[redirects]]
+  from = "/contact/"
+  to = "/contact.html"
+  status = 301
+[[redirects]]
+  from = "/don/"
+  to = "/don.html"
+  status = 301
+[[redirects]]
+  from = "/mentions-legales/"
+  to = "/mentions-legales.html"
+  status = 301

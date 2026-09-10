@@ -3,27 +3,289 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
   <title>Administration — École du Saint-Enfant-Jésus</title>
+  <link rel="icon" href="../wp-content/uploads/2025/10/esej-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root{--bleu:#021d51;--bleu2:#0b2f77;--or:#e5ae47;--or2:#c9922d;--fond:#f4f5f9;--carte:#fff;--texte:#1d2433;--gris:#6b7280;--ligne:#e3e6ee;--vert:#1e8e5a;--rouge:#c0392b}
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--fond);color:var(--texte);font-family:Montserrat,Arial,sans-serif;font-size:15px;line-height:1.5}
+    a{color:inherit}
+    button{font:inherit;cursor:pointer}
+    [hidden]{display:none!important}
+    .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+    /* ---------- en-tête ---------- */
+    header{background:var(--bleu);color:#fff;background-image:radial-gradient(ellipse at 15% 120%,rgba(229,174,71,.28),transparent 55%)}
+    header .wrap{display:flex;align-items:center;gap:18px;min-height:82px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+    header img{width:58px;height:58px;border-radius:50%;background:#fff;padding:3px}
+    header h1{font-size:18px;margin:0;font-weight:700;letter-spacing:.2px}
+    header h1 small{display:block;font-size:12px;font-weight:500;opacity:.8;margin-top:2px}
+    header .actions{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:10px 18px;font-weight:600;font-size:14px;text-decoration:none;transition:transform .12s,box-shadow .12s;white-space:nowrap}
+    .btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(2,29,81,.18)}
+    .btn-or{background:var(--or);color:var(--bleu)}
+    .btn-bleu{background:var(--bleu);color:#fff}
+    .btn-blanc{background:#fff;color:var(--bleu);border:1px solid var(--ligne)}
+    .btn-ghost{background:rgba(255,255,255,.12);color:#fff}
+    .btn-petit{padding:7px 13px;font-size:13px}
+    .btn-vert{background:var(--vert);color:#fff}
+    .btn-rouge{background:#fff;color:var(--rouge);border:1px solid #f1c7c1}
+
+    /* ---------- accueil / connexion ---------- */
+    .porte{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;background:var(--fond)}
+    .porte .boite{background:#fff;border-radius:22px;padding:44px 40px;max-width:520px;width:100%;text-align:center;box-shadow:0 12px 40px rgba(2,29,81,.10)}
+    .porte img{width:190px;max-width:100%}
+    .porte h2{color:var(--bleu);font-size:22px;margin:22px 0 6px}
+    .porte p{color:var(--gris);margin:0 0 26px;font-size:14px}
+    .porte .btn{width:100%;justify-content:center;padding:14px 18px;font-size:15px}
+    .porte .lien{display:block;margin-top:18px;font-size:14px;color:var(--bleu)}
+    .porte .note{margin-top:22px;font-size:12.5px;color:var(--gris);border-top:1px solid var(--ligne);padding-top:16px}
+    .porte .attente{background:#fff7e8;border:1px solid #f3dfb4;border-radius:14px;padding:16px;color:#6b4d0c;font-size:14px;margin:18px 0}
+
+    /* ---------- tableau de bord ---------- */
+    main{padding:34px 0 60px}
+    section{margin-bottom:38px}
+    .titre{display:flex;align-items:baseline;gap:14px;margin:0 0 16px}
+    .titre h2{font-size:20px;color:var(--bleu);margin:0;font-weight:800}
+    .titre p{margin:0;color:var(--gris);font-size:14px}
+    .grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+    .carte{background:var(--carte);border-radius:16px;overflow:hidden;box-shadow:0 2px 6px rgba(2,29,81,.06);border:1px solid var(--ligne);display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s}
+    .carte:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(2,29,81,.13)}
+    .carte .visuel{aspect-ratio:16/10;background:var(--bleu) center/cover no-repeat;position:relative}
+    .carte .visuel.logo{background-size:55%;background-color:#e9edf6}
+    .carte .visuel .badge{position:absolute;left:10px;top:10px;background:rgba(2,29,81,.85);color:#fff;font-size:11px;font-weight:600;padding:4px 9px;border-radius:999px}
+    .carte .visuel .badge.hors-menu{background:rgba(107,114,128,.9)}
+    .carte .corps{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px;flex:1}
+    .carte h3{margin:0;font-size:16px;color:var(--bleu);font-weight:700}
+    .carte .sous{color:var(--gris);font-size:13px}
+    .carte .pied{display:flex;gap:8px;margin-top:auto;padding-top:12px}
+    .carte .pied .btn{flex:1;justify-content:center}
+    .carte.ajout{border:2px dashed #c7cfe2;background:transparent;box-shadow:none;align-items:center;justify-content:center;min-height:230px;text-decoration:none;color:var(--bleu);font-weight:700;gap:10px}
+    .carte.ajout:hover{background:#fff;border-color:var(--or)}
+    .carte.ajout .plus{width:56px;height:56px;border-radius:50%;background:var(--or);color:var(--bleu);display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:600;line-height:1}
+    .carte.outil{flex-direction:row;align-items:center;gap:16px;padding:18px;text-decoration:none}
+    .carte.outil .ico{width:54px;height:54px;border-radius:14px;background:#eef1f8;color:var(--bleu);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .carte.outil .ico svg{width:28px;height:28px}
+    .carte.outil h3{font-size:15px}
+    .outils{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+
+    /* ---------- comptes ---------- */
+    .comptes{background:#fff;border-radius:16px;border:1px solid var(--ligne);overflow:hidden}
+    .compte{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;padding:14px 18px;border-top:1px solid var(--ligne)}
+    .compte:first-child{border-top:0}
+    .compte .nom{font-weight:700;color:var(--bleu)}
+    .compte .mail{font-size:13px;color:var(--gris)}
+    .compte .etat{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;margin-left:8px;vertical-align:middle}
+    .etat.admin{background:#e3f5ec;color:var(--vert)}.etat.maitre{background:#fff1d6;color:#8a5a00}.etat.en_attente{background:#fdeaea;color:var(--rouge)}.etat.non_confirme{background:#eef1f8;color:var(--gris)}
+    .compte .boutons{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+    .alerte{background:#fff7e8;border:1px solid #f3dfb4;border-radius:12px;padding:12px 16px;color:#6b4d0c;font-size:14px;margin-bottom:14px}
+    .vide{padding:18px;color:var(--gris);font-size:14px}
+    .aide{background:#fff;border-radius:16px;border:1px solid var(--ligne);padding:20px 24px;font-size:14px;color:#3b4252}
+    .aide ol{margin:8px 0 0;padding-left:20px}
+    .aide li{margin:4px 0}
+    footer{color:var(--gris);font-size:12.5px;text-align:center;padding:10px 20px 30px}
+    .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--bleu);color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:99}
+    @media (max-width:560px){.compte{grid-template-columns:1fr}.compte .boutons{justify-content:flex-start}header .actions{margin-left:0}}
+  </style>
 </head>
 <body>
-  <!-- Widget de connexion Netlify Identity -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <!-- Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@^3.3.3/dist/decap-cms.js"></script>
-  <script>
-    // Libellés en français : bouton de connexion du CMS et fenêtre Netlify Identity
-    if (window.netlifyIdentity && netlifyIdentity.setLocale) netlifyIdentity.setLocale('fr');
-    (function () {
-      var LABEL = 'Se connecter au compte Administrateur';
-      function relabel() {
-        document.querySelectorAll('button').forEach(function (b) {
-          var t = (b.textContent || '').trim();
-          if (/netlify identity/i.test(t) && t !== LABEL) b.textContent = LABEL;
-        });
-      }
-      new MutationObserver(relabel).observe(document.documentElement, { childList: true, subtree: true });
-      relabel();
-    })();
-  </script>
+
+<!-- ======================= ÉCRAN DE CONNEXION ======================= -->
+<div id="ecran-porte" class="porte" hidden>
+  <div class="boite">
+    <img src="../wp-content/uploads/2025/11/esej-logo-titre.png" alt="École du Saint-Enfant-Jésus" />
+    <div id="porte-connexion">
+      <h2>Mode édition du site</h2>
+      <p>Réservé aux membres autorisés du conseil d’administration.</p>
+      <button class="btn btn-bleu" id="btn-connexion">Se connecter au compte Administrateur</button>
+      <a href="#" class="lien" id="btn-inscription">Créer un nouveau compte administrateur</a>
+      <div class="note">Un nouveau compte doit être <strong>validé par le trésorier</strong> (compte Maître) avant de pouvoir modifier le site.</div>
+    </div>
+    <div id="porte-attente" hidden>
+      <h2>Compte en attente de validation</h2>
+      <div class="attente">Bonjour <strong id="attente-nom"></strong>. Votre compte a bien été créé, mais il doit être validé par le trésorier avant de pouvoir modifier le site. Il en a été informé ; vous pourrez vous reconnecter dès que ce sera fait.</div>
+      <button class="btn btn-blanc" id="btn-deconnexion-attente">Se déconnecter</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= TABLEAU DE BORD ======================= -->
+<div id="ecran-tdb" hidden>
+  <header>
+    <div class="wrap">
+      <img src="../wp-content/uploads/2025/10/esej-logo.png" alt="" />
+      <h1>Administration du site<small id="salut">École du Saint-Enfant-Jésus</small></h1>
+      <div class="actions">
+        <a class="btn btn-ghost" href="../" target="_blank" rel="noopener">Voir le site ↗</a>
+        <a class="btn btn-or" href="cms.html#/collections/pages/new">+ Nouvelle page</a>
+        <button class="btn btn-ghost" id="btn-deconnexion">Se déconnecter</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="pages">
+      <div class="titre"><h2>Pages du site</h2><p>Cliquez sur une page pour modifier ses textes, ses titres et ses photos.</p></div>
+      <div class="grille" id="grille-pages"></div>
+    </section>
+
+    <section id="outils">
+      <div class="titre"><h2>Réglages et médias</h2></div>
+      <div class="grille outils">
+        <a class="carte outil" href="cms.html#/collections/reglages/entries/site">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></div>
+          <div><h3>Réglages du site</h3><div class="sous">Coordonnées, téléphone, e-mail, réseaux sociaux, pied de page, appel au don, formulaire.</div></div>
+        </a>
+        <a class="carte outil" href="cms.html?media#/collections/pages">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="M21 16l-5.2-5.2a1 1 0 0 0-1.4 0L6 19"/></svg></div>
+          <div><h3>Médiathèque</h3><div class="sous">Toutes les photos du site, et ajout de nouvelles images.</div></div>
+        </a>
+        <a class="carte outil" href="cms.html#/collections/reglages/entries/accueil">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></div>
+          <div><h3>Page d’accueil</h3><div class="sous">Bienvenue, atouts, photos, notre mission.</div></div>
+        </a>
+      </div>
+    </section>
+
+    <section id="comptes" hidden>
+      <div class="titre"><h2>Comptes administrateurs</h2><p>Visible uniquement par le compte Maître (trésorier).</p></div>
+      <div id="comptes-alerte" class="alerte" hidden></div>
+      <div class="comptes" id="liste-comptes"><div class="vide">Chargement…</div></div>
+    </section>
+
+    <section>
+      <div class="aide">
+        <strong>Comment ça marche ?</strong>
+        <ol>
+          <li>Ouvrez une page ou un réglage, modifiez, puis cliquez sur <strong>Publier</strong> (en haut à droite de l’éditeur).</li>
+          <li>Le site se met à jour automatiquement en <strong>1 à 2 minutes</strong>. Rechargez la page du site pour voir le résultat.</li>
+          <li>Pour retirer une page du menu sans la supprimer, décochez « Afficher dans le menu » dans ses réglages.</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+  <footer>Mode édition du site de l’École du Saint-Enfant-Jésus · les modifications sont enregistrées avec le nom du compte qui les effectue.</footer>
+</div>
+
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+(function () {
+  var NI = window.netlifyIdentity;
+  var $ = function (id) { return document.getElementById(id); };
+  if (NI && NI.setLocale) NI.setLocale('fr');
+
+  function roles(u) { return (u && u.app_metadata && u.app_metadata.roles) || []; }
+  function estValide(u) { var r = roles(u); return r.indexOf('admin') >= 0 || r.indexOf('maitre') >= 0; }
+  function estMaitre(u) { return roles(u).indexOf('maitre') >= 0; }
+  function nom(u) { return (u && u.user_metadata && u.user_metadata.full_name) || (u && u.email) || ''; }
+
+  function toast(msg) { var t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; document.body.appendChild(t); setTimeout(function () { t.remove(); }, 3500); }
+
+  // ---------- affichage selon l'état ----------
+  function afficher(u) {
+    if (!u) {
+      $('ecran-tdb').hidden = true; $('ecran-porte').hidden = false;
+      $('porte-connexion').hidden = false; $('porte-attente').hidden = true;
+      return;
+    }
+    if (!estValide(u)) {
+      $('ecran-tdb').hidden = true; $('ecran-porte').hidden = false;
+      $('porte-connexion').hidden = true; $('porte-attente').hidden = false;
+      $('attente-nom').textContent = nom(u);
+      return;
+    }
+    $('ecran-porte').hidden = true; $('ecran-tdb').hidden = false;
+    $('salut').textContent = 'Bonjour ' + nom(u) + (estMaitre(u) ? ' · compte Maître' : '');
+    chargerPages();
+    $('comptes').hidden = !estMaitre(u);
+    if (estMaitre(u)) chargerComptes(u);
+    if (location.hash === '#comptes' && estMaitre(u)) setTimeout(function () { $('comptes').scrollIntoView({ behavior: 'smooth' }); }, 300);
+  }
+
+  // ---------- vignettes des pages ----------
+  function carte(p, lienEdition) {
+    var estLogo = /esej-logo/.test(p.image || '');
+    return '<div class="carte">' +
+      '<a class="visuel' + (estLogo ? ' logo' : '') + '" href="' + lienEdition + '" style="background-image:url(\'' + (p.image || '') + '\')">' +
+      (p.dans_menu === false ? '<span class="badge hors-menu">Hors menu</span>' : '') + '</a>' +
+      '<div class="corps"><h3>' + esc(p.titre) + '</h3><div class="sous">' + esc(p.sous_titre) + '</div>' +
+      '<div class="pied"><a class="btn btn-bleu btn-petit" href="' + lienEdition + '">Modifier</a>' +
+      '<a class="btn btn-blanc btn-petit" href="../' + p.url + '" target="_blank" rel="noopener">Voir</a></div></div></div>';
+  }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function chargerPages() {
+    fetch('pages.json?' + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
+      var html = carte(d.accueil, 'cms.html#/collections/reglages/entries/accueil');
+      d.pages.forEach(function (p) { html += carte(p, 'cms.html#/collections/pages/entries/' + encodeURIComponent(p.slug)); });
+      html += '<a class="carte ajout" href="cms.html#/collections/pages/new"><span class="plus">+</span>Nouvelle page</a>';
+      $('grille-pages').innerHTML = html;
+    }).catch(function () { $('grille-pages').innerHTML = '<div class="vide">Impossible de charger la liste des pages.</div>'; });
+  }
+
+  // ---------- comptes (compte Maître) ----------
+  function appel(u, corps) {
+    return u.jwt().then(function (jeton) {
+      return fetch('/.netlify/functions/comptes', { method: 'POST', headers: { Authorization: 'Bearer ' + jeton, 'Content-Type': 'application/json' }, body: JSON.stringify(corps) });
+    }).then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.erreur || 'Erreur'); return j; }); });
+  }
+  function libelleEtat(c) {
+    if (!c.confirme) return '<span class="etat non_confirme">e-mail non confirmé</span>';
+    if (c.roles.indexOf('maitre') >= 0) return '<span class="etat maitre">Maître</span>';
+    if (c.roles.indexOf('admin') >= 0) return '<span class="etat admin">Administrateur</span>';
+    return '<span class="etat en_attente">En attente de validation</span>';
+  }
+  function chargerComptes(u) {
+    appel(u, { action: 'lister' }).then(function (d) {
+      var attente = d.comptes.filter(function (c) { return c.roles.indexOf('admin') < 0 && c.roles.indexOf('maitre') < 0; });
+      $('comptes-alerte').hidden = attente.length === 0;
+      $('comptes-alerte').textContent = attente.length === 1 ? '1 compte attend votre validation.' : attente.length + ' comptes attendent votre validation.';
+      $('liste-comptes').innerHTML = d.comptes.length ? d.comptes.map(function (c) {
+        var maitre = c.roles.indexOf('maitre') >= 0, admin = c.roles.indexOf('admin') >= 0;
+        var boutons = '';
+        if (!maitre && !admin) boutons = '<button class="btn btn-vert btn-petit" data-a="valider" data-id="' + c.id + '">Valider ce compte</button><button class="btn btn-rouge btn-petit" data-a="refuser" data-id="' + c.id + '">Refuser</button>';
+        else if (admin && !maitre) boutons = '<button class="btn btn-blanc btn-petit" data-a="retirer" data-id="' + c.id + '">Suspendre l’accès</button><button class="btn btn-rouge btn-petit" data-a="refuser" data-id="' + c.id + '">Supprimer</button>';
+        return '<div class="compte"><div><span class="nom">' + esc(c.nom || '(sans nom)') + '</span>' + libelleEtat(c) + '<div class="mail">' + esc(c.email) + (c.derniere_connexion ? ' · dernière connexion le ' + new Date(c.derniere_connexion).toLocaleDateString('fr-FR') : '') + '</div></div><div class="boutons">' + boutons + '</div></div>';
+      }).join('') : '<div class="vide">Aucun compte.</div>';
+    }).catch(function (e) {
+      $('liste-comptes').innerHTML = '<div class="vide">' + esc(e.message) + '</div>';
+    });
+  }
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('button[data-a]'); if (!b) return;
+    var u = NI.currentUser(); if (!u) return;
+    var libelle = { valider: 'Valider ce compte ? La personne pourra modifier le site.', refuser: 'Supprimer définitivement ce compte ?', retirer: 'Suspendre l’accès de ce compte ?' }[b.dataset.a];
+    if (!window.confirm(libelle)) return;
+    b.disabled = true;
+    appel(u, { action: b.dataset.a, id: b.dataset.id }).then(function () { toast('C’est fait.'); chargerComptes(u); })
+      .catch(function (e) { toast('Erreur : ' + e.message); b.disabled = false; });
+  });
+
+  // ---------- connexion / inscription ----------
+  $('btn-connexion').addEventListener('click', function () { NI.open('login'); });
+  $('btn-inscription').addEventListener('click', function (e) { e.preventDefault(); NI.open('signup'); });
+  $('btn-deconnexion').addEventListener('click', function () { NI.logout(); });
+  $('btn-deconnexion-attente').addEventListener('click', function () { NI.logout(); });
+
+  function rafraichir(u) {
+    // Recharge les informations du compte (le rôle a pu être validé entre-temps)
+    if (!u) return afficher(null);
+    var fait = false;
+    var fin = function (uu) { if (!fait) { fait = true; afficher(uu || u); } };
+    Promise.resolve().then(function () { return u.jwt(true); }).then(function () { return u.getUserData ? u.getUserData() : u; }).then(fin, function () { fin(u); });
+    setTimeout(function () { fin(u); }, 4000);
+  }
+  if (!NI) { $('ecran-porte').hidden = false; return; }
+  var initFait = false;
+  NI.on('init', function (u) { initFait = true; rafraichir(u); });
+  NI.on('login', function (u) { NI.close(); rafraichir(u); });
+  NI.on('logout', function () { afficher(null); });
+  NI.on('error', function (e) { console.error(e); });
+  // Si le widget s'est initialisé avant l'attache des écouteurs, on rattrape l'état courant
+  setTimeout(function () { if (!initFait) rafraichir(NI.currentUser()); }, 1500);
+})();
+</script>
 </body>
 </html>

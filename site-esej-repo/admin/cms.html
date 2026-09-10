@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Éditeur — École du Saint-Enfant-Jésus</title>
+  <style>
+    #esej-retour{position:fixed;left:14px;bottom:14px;z-index:2147483000;background:#021d51;color:#fff;font:600 13px/1 Montserrat,Arial,sans-serif;padding:10px 14px;border-radius:999px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.25);opacity:.92}
+    #esej-retour:hover{opacity:1}
+  </style>
+</head>
+<body>
+  <!-- Widget de connexion Netlify Identity -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    // Garde-fou : l'éditeur n'est accessible qu'aux comptes validés (rôles admin ou maitre).
+    (function () {
+      if (window.netlifyIdentity && netlifyIdentity.setLocale) netlifyIdentity.setLocale('fr');
+      var u = window.netlifyIdentity && netlifyIdentity.currentUser();
+      var roles = (u && u.app_metadata && u.app_metadata.roles) || [];
+      var ok = roles.indexOf('admin') >= 0 || roles.indexOf('maitre') >= 0;
+      if (!u || !ok) { location.replace('./' + (u ? '#attente' : '')); return; }
+      if (window.netlifyIdentity) netlifyIdentity.on('logout', function () { location.replace('./'); });
+    })();
+  </script>
+  <!-- Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@^3.3.3/dist/decap-cms.js"></script>
+  <a id="esej-retour" href="./">← Tableau de bord</a>
+  <script>
+    // Libellé français du bouton de connexion, et ouverture directe de la médiathèque (cms.html?media)
+    (function () {
+      var LABEL = 'Se connecter au compte Administrateur';
+      var openMedia = /[?&]media/.test(location.search);
+      function tick() {
+        document.querySelectorAll('button').forEach(function (b) {
+          var t = (b.textContent || '').trim();
+          if (/netlify identity/i.test(t) && t !== LABEL) b.textContent = LABEL;
+          if (openMedia && /^(m[ée]dia|media)s?$/i.test(t)) { openMedia = false; b.click(); }
+        });
+      }
+      new MutationObserver(tick).observe(document.documentElement, { childList: true, subtree: true });
+      tick();
+    })();
+  </script>
+</body>
+</html>
