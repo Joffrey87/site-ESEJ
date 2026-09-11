@@ -13,23 +13,23 @@ Accès discrets depuis le site :
   - le petit cadenas à la fin de la ligne « © … » en bas de page ;
   - l'icône crayon qui apparaît au survol du coin haut-droit de la page.
 Connexion : e-mail + mot de passe. Le tableau de bord présente les pages en
-vignettes, les réglages, la médiathèque et (pour le compte Maître) les comptes.
+vignettes, les réglages, la médiathèque et, en bas, le Menu administrateur (historique, comptes).
 
 COMPTES ET RÔLES
   - « Créer un nouveau compte administrateur » (écran de connexion) : chacun
     choisit son nom, son e-mail et son mot de passe. Le compte est créé « en
     attente » : il ne peut rien modifier tant que le trésorier ne l'a pas validé.
-  - Le compte Maître (trésorier) reçoit un e-mail à chaque inscription et
-    valide / refuse / suspend les comptes dans la rubrique « Comptes » du
-    tableau de bord.
-  - CHANGEMENT DE TRÉSORIER : le Maître en poste ouvre « Comptes », puis clique
-    « Définir Maître » sur la ligne du nouveau trésorier (son compte
-    doit déjà exister et être validé). Le nouveau devient Maître, l'ancien
-    redevient simple administrateur. Il n'y a qu'un seul compte Maître à la fois.
-    En dernier recours (Maître perdu ou inaccessible), un responsable du compte
+  - Le Grand Administrateur (trésorier) reçoit un e-mail à chaque inscription et
+    valide / refuse / suspend les comptes dans Menu administrateur → Comptes,
+    en bas du tableau de bord (où figure aussi l'historique des modifications).
+  - CHANGEMENT DE TRÉSORIER : le Grand Administrateur en poste ouvre Menu administrateur → Comptes, puis clique
+    « Définir Grand Administrateur » sur la ligne du nouveau trésorier (son compte
+    doit déjà exister et être validé). Le nouveau devient Grand Administrateur, l'ancien
+    redevient simple administrateur. Il n'y a qu'un seul Grand Administrateur à la fois.
+    En dernier recours (Grand Administrateur perdu ou inaccessible), un responsable du compte
     Netlify peut réattribuer le rôle : Netlify → Identity → cliquer sur
     l'utilisateur → Edit settings → Roles = maitre (en minuscules).
-  - Rôles Netlify : maitre (trésorier), admin (peut tout modifier),
+  - Rôles Netlify : maitre (Grand Administrateur), admin (peut tout modifier),
     en_attente (aucun droit). Réglages Netlify à conserver : Identity →
     Registration = Open ; Services → Git Gateway → Roles = admin, maitre ;
     variable d'environnement WEB3FORMS_TRESORIER_KEY = clé Web3Forms créée

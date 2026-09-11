@@ -19,11 +19,13 @@
 
     /* ---------- en-tête ---------- */
     header{background:var(--bleu);color:#fff;background-image:radial-gradient(ellipse at 15% 120%,rgba(229,174,71,.28),transparent 55%)}
-    header .wrap{display:flex;align-items:center;gap:18px;min-height:82px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+    header .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;min-height:82px;padding-top:10px;padding-bottom:10px}
+    header .marque{display:flex;align-items:center;gap:14px}
     header img{width:58px;height:58px;border-radius:50%;background:#fff;padding:3px}
     header h1{font-size:18px;margin:0;font-weight:700;letter-spacing:.2px}
     header h1 small{display:block;font-size:12px;font-weight:500;opacity:.8;margin-top:2px}
-    header .actions{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap}
+    header .centre{justify-self:center}
+    header .actions{justify-self:end;display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
     .btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:10px 18px;font-weight:600;font-size:14px;text-decoration:none;transition:transform .12s,box-shadow .12s;white-space:nowrap}
     .btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(2,29,81,.18)}
     .btn-or{background:var(--or);color:var(--bleu)}
@@ -33,6 +35,7 @@
     .btn-petit{padding:7px 13px;font-size:13px}
     .btn-vert{background:var(--vert);color:#fff}
     .btn-rouge{background:#fff;color:var(--rouge);border:1px solid #f1c7c1}
+    .btn-grand{padding:13px 26px;font-size:15px}
 
     /* ---------- accueil / connexion ---------- */
     .porte{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;background:var(--fond)}
@@ -46,7 +49,7 @@
     .porte .attente{background:#fff7e8;border:1px solid #f3dfb4;border-radius:14px;padding:16px;color:#6b4d0c;font-size:14px;margin:18px 0}
 
     /* ---------- tableau de bord ---------- */
-    main{padding:34px 0 60px}
+    main.wrap{padding-top:30px;padding-bottom:50px}
     section{margin-bottom:38px}
     .titre{display:flex;align-items:baseline;gap:14px;margin:0 0 16px}
     .titre h2{font-size:20px;color:var(--bleu);margin:0;font-weight:800}
@@ -72,23 +75,51 @@
     .carte.outil h3{font-size:15px}
     .outils{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
 
-    /* ---------- comptes ---------- */
-    .comptes{background:#fff;border-radius:16px;border:1px solid var(--ligne);overflow:hidden}
-    .compte{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;padding:14px 18px;border-top:1px solid var(--ligne)}
+    /* ---------- menu administrateur ---------- */
+    .menu-admin{background:#fff;border-radius:16px;border:1px solid var(--ligne);overflow:hidden}
+    .menu-admin > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:16px 20px;font-weight:800;color:var(--bleu);font-size:17px;user-select:none}
+    .menu-admin > summary::-webkit-details-marker{display:none}
+    .menu-admin > summary .chev{margin-left:auto;transition:transform .2s;color:var(--gris)}
+    .menu-admin[open] > summary .chev{transform:rotate(180deg)}
+    .menu-admin > summary .pastille{background:var(--rouge);color:#fff;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px}
+    .onglets{display:flex;gap:4px;padding:0 14px;border-top:1px solid var(--ligne);border-bottom:1px solid var(--ligne);background:#fafbfd}
+    .onglets button{background:none;border:0;padding:12px 14px;font-weight:600;color:var(--gris);border-bottom:3px solid transparent;margin-bottom:-1px}
+    .onglets button.actif{color:var(--bleu);border-bottom-color:var(--or)}
+    .onglets .droite{margin-left:auto;align-self:center;font-size:12.5px;color:var(--gris);padding-right:6px}
+    .panneau{padding:6px 0 0}
+    .histo{list-style:none;margin:0;padding:0}
+    .histo li{display:grid;grid-template-columns:150px 1fr auto;gap:14px;align-items:start;padding:12px 20px;border-top:1px solid var(--ligne);font-size:14px}
+    .histo li:first-child{border-top:0}
+    .histo .quand{color:var(--gris);font-size:13px;line-height:1.35}
+    .histo .quand b{display:block;color:var(--texte);font-weight:600}
+    .histo .quoi{font-weight:600;color:var(--bleu)}
+    .histo .quoi small{display:block;font-weight:400;color:var(--gris);font-size:12.5px;margin-top:2px}
+    .histo .qui{font-size:12.5px;color:var(--gris);text-align:right;white-space:nowrap}
+    .histo .tech .quoi{color:var(--gris);font-weight:500}
+    .histo .tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 7px;border-radius:999px;background:#eef1f8;color:var(--gris);margin-left:6px;vertical-align:middle}
+    .compte{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;padding:14px 20px;border-top:1px solid var(--ligne)}
     .compte:first-child{border-top:0}
     .compte .nom{font-weight:700;color:var(--bleu)}
     .compte .mail{font-size:13px;color:var(--gris)}
     .compte .etat{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;margin-left:8px;vertical-align:middle}
     .etat.admin{background:#e3f5ec;color:var(--vert)}.etat.maitre{background:#fff1d6;color:#8a5a00}.etat.en_attente{background:#fdeaea;color:var(--rouge)}.etat.non_confirme{background:#eef1f8;color:var(--gris)}
     .compte .boutons{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-    .alerte{background:#fff7e8;border:1px solid #f3dfb4;border-radius:12px;padding:12px 16px;color:#6b4d0c;font-size:14px;margin-bottom:14px}
-    .vide{padding:18px;color:var(--gris);font-size:14px}
-    .aide{background:#fff;border-radius:16px;border:1px solid var(--ligne);padding:20px 24px;font-size:14px;color:#3b4252}
-    .aide ol{margin:8px 0 0;padding-left:20px}
-    .aide li{margin:4px 0}
+    .alerte{background:#fff7e8;border:1px solid #f3dfb4;padding:12px 20px;color:#6b4d0c;font-size:14px}
+    .vide{padding:18px 20px;color:var(--gris);font-size:14px}
+    .plus-histo{display:block;width:100%;background:#fafbfd;border:0;border-top:1px solid var(--ligne);padding:12px;color:var(--bleu);font-weight:600}
     footer{color:var(--gris);font-size:12.5px;text-align:center;padding:10px 20px 30px}
+
+    /* ---------- aide ---------- */
+    .voile{position:fixed;inset:0;background:rgba(2,29,81,.45);display:flex;align-items:center;justify-content:center;padding:20px;z-index:50}
+    .aide{background:#fff;border-radius:18px;max-width:640px;width:100%;max-height:90vh;overflow:auto;padding:28px 30px;box-shadow:0 20px 60px rgba(0,0,0,.3);font-size:14.5px;color:#3b4252;position:relative}
+    .aide h2{margin:0 0 14px;color:var(--bleu);font-size:20px}
+    .aide h3{margin:18px 0 6px;color:var(--bleu);font-size:15px}
+    .aide p{margin:6px 0}
+    .aide ol,.aide ul{margin:6px 0;padding-left:22px}
+    .aide li{margin:4px 0}
+    .aide .fermer{position:absolute;right:14px;top:12px;background:#eef1f8;border:0;border-radius:50%;width:34px;height:34px;font-size:18px;color:var(--bleu)}
     .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--bleu);color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:99}
-    @media (max-width:560px){.compte{grid-template-columns:1fr}.compte .boutons{justify-content:flex-start}header .actions{margin-left:0}}
+    @media (max-width:760px){header .wrap{grid-template-columns:1fr;justify-items:center;text-align:center}header .actions{justify-self:center;justify-content:center}.histo li{grid-template-columns:1fr}.histo .qui{text-align:left}.compte{grid-template-columns:1fr}.compte .boutons{justify-content:flex-start}}
   </style>
 </head>
 <body>
@@ -102,11 +133,11 @@
       <p>Réservé aux membres autorisés du conseil d’administration.</p>
       <button class="btn btn-bleu" id="btn-connexion">Se connecter au compte Administrateur</button>
       <a href="#" class="lien" id="btn-inscription">Créer un nouveau compte administrateur</a>
-      <div class="note">Un nouveau compte doit être <strong>validé par le trésorier</strong> (compte Maître) avant de pouvoir modifier le site.</div>
+      <div class="note">Un nouveau compte doit être <strong>validé par le Grand Administrateur</strong> avant de pouvoir modifier le site.</div>
     </div>
     <div id="porte-attente" hidden>
       <h2>Compte en attente de validation</h2>
-      <div class="attente">Bonjour <strong id="attente-nom"></strong>. Votre compte a bien été créé, mais il doit être validé par le trésorier avant de pouvoir modifier le site. Il en a été informé ; vous pourrez vous reconnecter dès que ce sera fait.</div>
+      <div class="attente">Bonjour <strong id="attente-nom"></strong>. Votre compte a bien été créé, mais il doit être validé par le Grand Administrateur avant de pouvoir modifier le site. Il en a été informé ; vous pourrez vous reconnecter dès que ce sera fait.</div>
       <button class="btn btn-blanc" id="btn-deconnexion-attente">Se déconnecter</button>
     </div>
   </div>
@@ -116,11 +147,14 @@
 <div id="ecran-tdb" hidden>
   <header>
     <div class="wrap">
-      <img src="../wp-content/uploads/2025/10/esej-logo.png" alt="" />
-      <h1>Administration du site<small id="salut">École du Saint-Enfant-Jésus</small></h1>
+      <div class="marque">
+        <img src="../wp-content/uploads/2025/10/esej-logo.png" alt="" />
+        <h1>Administration du site<small id="salut">École du Saint-Enfant-Jésus</small></h1>
+      </div>
+      <div class="centre"><a class="btn btn-or btn-grand" href="cms.html#/collections/pages/new">+ Nouvelle page</a></div>
       <div class="actions">
         <a class="btn btn-ghost" href="../" target="_blank" rel="noopener">Voir le site ↗</a>
-        <a class="btn btn-or" href="cms.html#/collections/pages/new">+ Nouvelle page</a>
+        <button class="btn btn-ghost" id="btn-aide">Aide ?</button>
         <button class="btn btn-ghost" id="btn-deconnexion">Se déconnecter</button>
       </div>
     </div>
@@ -128,14 +162,13 @@
 
   <main class="wrap">
     <section id="pages">
-      <div class="titre"><h2>Pages du site</h2><p>Cliquez sur une page pour modifier ses textes, ses titres et ses photos.</p></div>
       <div class="grille" id="grille-pages"></div>
     </section>
 
     <section id="outils">
       <div class="titre"><h2>Réglages et médias</h2></div>
       <div class="grille outils">
-        <a class="carte outil" href="cms.html#/collections/reglages/entries/site">
+        <a class="carte outil" href="cms.html#/collections/site/entries/site">
           <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></div>
           <div><h3>Réglages du site</h3><div class="sous">Coordonnées, téléphone, e-mail, réseaux sociaux, pied de page, appel au don, formulaire.</div></div>
         </a>
@@ -143,31 +176,63 @@
           <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="M21 16l-5.2-5.2a1 1 0 0 0-1.4 0L6 19"/></svg></div>
           <div><h3>Médiathèque</h3><div class="sous">Toutes les photos du site, et ajout de nouvelles images.</div></div>
         </a>
-        <a class="carte outil" href="cms.html#/collections/reglages/entries/accueil">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></div>
-          <div><h3>Page d’accueil</h3><div class="sous">Bienvenue, atouts, photos, notre mission.</div></div>
-        </a>
       </div>
     </section>
 
-    <section id="comptes" hidden>
-      <div class="titre"><h2>Comptes administrateurs</h2><p>Visible uniquement par le compte Maître (trésorier), qui valide les nouveaux comptes et peut transmettre son rôle.</p></div>
-      <div id="comptes-alerte" class="alerte" hidden></div>
-      <div class="comptes" id="liste-comptes"><div class="vide">Chargement…</div></div>
-    </section>
-
-    <section>
-      <div class="aide">
-        <strong>Comment ça marche ?</strong>
-        <ol>
-          <li>Ouvrez une page ou un réglage, modifiez, puis cliquez sur <strong>Publier</strong> (en haut à droite de l’éditeur).</li>
-          <li>Le site se met à jour automatiquement en <strong>1 à 2 minutes</strong>. Rechargez la page du site pour voir le résultat.</li>
-          <li>Pour retirer une page du menu sans la supprimer, décochez « Afficher dans le menu » dans ses réglages.</li>
-        </ol>
-      </div>
+    <section id="admin">
+      <details class="menu-admin" id="menu-admin">
+        <summary>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+          Menu administrateur
+          <span class="pastille" id="pastille-attente" hidden></span>
+          <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="onglets">
+          <button class="actif" data-onglet="historique">Historique des modifications</button>
+          <button data-onglet="comptes">Comptes</button>
+          <a class="droite" href="cms.html?liste#/collections/pages">Vue liste de l’éditeur (avancé)</a>
+        </div>
+        <div class="panneau" id="panneau-historique">
+          <ul class="histo" id="liste-histo"><li class="vide">Chargement…</li></ul>
+          <button class="plus-histo" id="btn-plus-histo" hidden>Voir plus</button>
+        </div>
+        <div class="panneau" id="panneau-comptes" hidden>
+          <div id="comptes-alerte" class="alerte" hidden></div>
+          <div id="liste-comptes"><div class="vide">Chargement…</div></div>
+          <div class="vide" id="comptes-note"></div>
+        </div>
+      </details>
     </section>
   </main>
-  <footer>Mode édition du site de l’École du Saint-Enfant-Jésus · les modifications sont enregistrées avec le nom du compte qui les effectue.<br><a href="cms.html?liste#/collections/pages" style="color:inherit">Vue liste de l’éditeur (avancé)</a></footer>
+  <footer>Mode édition du site de l’École du Saint-Enfant-Jésus</footer>
+</div>
+
+<!-- ======================= AIDE ======================= -->
+<div class="voile" id="aide" hidden>
+  <div class="aide" role="dialog" aria-labelledby="aide-titre">
+    <button class="fermer" id="btn-fermer-aide" aria-label="Fermer">×</button>
+    <h2 id="aide-titre">Comment ça marche ?</h2>
+    <h3>Modifier une page</h3>
+    <ol>
+      <li>Cliquez sur une page (ou « Modifier »). L’éditeur s’ouvre : le formulaire à gauche, l’aperçu de la page à droite.</li>
+      <li><strong>Cliquez directement sur un texte dans l’aperçu</strong> pour le modifier : la saisie est reportée dans le formulaire. Les photos, l’ordre des sections et les réglages se changent dans le formulaire.</li>
+      <li>Cliquez sur <strong>Publier</strong> (en haut). Le site se met à jour en 1 à 2 minutes ; rechargez la page du site (Ctrl+F5) pour voir le résultat.</li>
+      <li>La flèche « ← » ou « Tableau de bord » ramène ici. Si vous quittez sans publier, il vous sera demandé de confirmer.</li>
+    </ol>
+    <h3>Pages</h3>
+    <ul>
+      <li>« + Nouvelle page » : le nom donne l’adresse (« Nos activités » → nos-activites.html). Ajoutez ensuite des sections (introduction, texte + image, liste…).</li>
+      <li>Pour retirer une page du menu sans la supprimer : dans « Réglages de la page », décochez « Dans le menu du haut ».</li>
+      <li>Pour supprimer une page : l’ouvrir → « Supprimer l’entrée ».</li>
+    </ul>
+    <h3>Comptes</h3>
+    <ul>
+      <li>Toute personne peut créer un compte depuis l’écran de connexion ; il reste inactif jusqu’à validation par le <strong>Grand Administrateur</strong> (Menu administrateur → Comptes).</li>
+      <li>Le Grand Administrateur peut transmettre son rôle (« Définir Grand Administrateur ») ; il n’y en a qu’un à la fois.</li>
+    </ul>
+    <h3>Historique</h3>
+    <p>Le Menu administrateur liste chaque publication : date, auteur, page concernée. Rien n’est jamais perdu : chaque version est conservée.</p>
+  </div>
 </div>
 
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -177,14 +242,16 @@
   var $ = function (id) { return document.getElementById(id); };
   if (NI && NI.setLocale) NI.setLocale('fr');
 
+  var GRAND = 'Grand Administrateur';
   function roles(u) { return ((u && u.app_metadata && u.app_metadata.roles) || []).map(function (r) { return String(r).toLowerCase(); }); }
   function estValide(u) { var r = roles(u); return r.indexOf('admin') >= 0 || r.indexOf('maitre') >= 0; }
-  function estMaitre(u) { return roles(u).indexOf('maitre') >= 0; }
+  function estGrand(u) { return roles(u).indexOf('maitre') >= 0; }
   function nom(u) { return (u && u.user_metadata && u.user_metadata.full_name) || (u && u.email) || ''; }
-
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function toast(msg) { var t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; document.body.appendChild(t); setTimeout(function () { t.remove(); }, 3500); }
 
   // ---------- affichage selon l'état ----------
+  var PAGES = null; // pages.json (pour l'historique aussi)
   function afficher(u) {
     if (!u) {
       $('ecran-tdb').hidden = true; $('ecran-porte').hidden = false;
@@ -198,11 +265,10 @@
       return;
     }
     $('ecran-porte').hidden = true; $('ecran-tdb').hidden = false;
-    $('salut').textContent = 'Bonjour ' + nom(u) + (estMaitre(u) ? ' · compte Maître' : '');
-    chargerPages();
-    $('comptes').hidden = !estMaitre(u);
-    if (estMaitre(u)) chargerComptes(u);
-    if (location.hash === '#comptes' && estMaitre(u)) setTimeout(function () { $('comptes').scrollIntoView({ behavior: 'smooth' }); }, 300);
+    $('salut').textContent = 'Bonjour ' + nom(u) + (estGrand(u) ? ' · ' + GRAND : '');
+    chargerPages().then(function () { chargerHistorique(u, false); });
+    chargerComptes(u);
+    if (location.hash === '#comptes') { $('menu-admin').open = true; ongletActif('comptes'); setTimeout(function () { $('menu-admin').scrollIntoView({ behavior: 'smooth' }); }, 300); }
   }
 
   // ---------- vignettes des pages ----------
@@ -215,17 +281,74 @@
       '<div class="pied"><a class="btn btn-bleu btn-petit" href="' + lienEdition + '">Modifier</a>' +
       '<a class="btn btn-blanc btn-petit" href="../' + p.url + '" target="_blank" rel="noopener">Voir</a></div></div></div>';
   }
-  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function chargerPages() {
-    fetch('pages.json?' + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
-      var html = carte(d.accueil, 'cms.html#/collections/reglages/entries/accueil');
+    return fetch('pages.json?' + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
+      PAGES = d;
+      var html = carte(d.accueil, 'cms.html#/collections/accueil/entries/accueil');
       d.pages.forEach(function (p) { html += carte(p, 'cms.html#/collections/pages/entries/' + encodeURIComponent(p.slug)); });
       html += '<a class="carte ajout" href="cms.html#/collections/pages/new"><span class="plus">+</span>Nouvelle page</a>';
       $('grille-pages').innerHTML = html;
     }).catch(function () { $('grille-pages').innerHTML = '<div class="vide">Impossible de charger la liste des pages.</div>'; });
   }
 
-  // ---------- comptes (compte Maître) ----------
+  // ---------- menu administrateur : onglets ----------
+  function ongletActif(nomOnglet) {
+    document.querySelectorAll('.onglets button').forEach(function (b) { b.classList.toggle('actif', b.dataset.onglet === nomOnglet); });
+    $('panneau-historique').hidden = nomOnglet !== 'historique';
+    $('panneau-comptes').hidden = nomOnglet !== 'comptes';
+  }
+  document.querySelectorAll('.onglets button').forEach(function (b) { b.addEventListener('click', function () { ongletActif(b.dataset.onglet); }); });
+
+  // ---------- historique des modifications (commits du dépôt, via Git Gateway) ----------
+  var HISTO = { page: 1, comptes: {} };
+  function nomPage(slug) {
+    if (!PAGES) return slug;
+    if (slug === 'accueil') return 'Page d’accueil';
+    if (slug === 'site') return 'Réglages du site';
+    var p = PAGES.pages.find(function (x) { return x.slug === slug; });
+    return p ? p.titre : slug;
+  }
+  function decrire(message) {
+    var l = message.split('\n')[0];
+    var m;
+    if ((m = l.match(/^Admin : (création|modification|suppression) de « ([^»]+) » \((\w+)\)/))) {
+      if (m[3] === 'pages') return { titre: { création: 'Création de', modification: 'Modification de', suppression: 'Suppression de' }[m[1]] + ' la page « ' + nomPage(m[2]) + ' »', tech: false };
+      return { titre: m[2] === 'accueil' ? 'Modification de la page d’accueil' : 'Modification des réglages du site', tech: false };
+    }
+    if ((m = l.match(/^Admin : ajout de l'image (.+)$/))) return { titre: 'Ajout de l’image ' + m[1].split('/').pop(), tech: false };
+    if ((m = l.match(/^Admin : suppression de l'image (.+)$/))) return { titre: 'Suppression de l’image ' + m[1].split('/').pop(), tech: false };
+    return { titre: l.length > 110 ? l.slice(0, 107) + '…' : l, tech: true };
+  }
+  function quand(iso) {
+    var d = new Date(iso);
+    return '<b>' + d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) + '</b>' + d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+  }
+  function qui(c) {
+    var a = c.commit.author || {}, email = (a.email || '').toLowerCase();
+    var compte = HISTO.comptes[email];
+    if (compte) return compte.nom || compte.email;
+    if (/claude|anthropic|noreply@github/i.test(email + ' ' + (a.name || ''))) return 'Mise à jour technique';
+    return a.name || email || '—';
+  }
+  function chargerHistorique(u, suite) {
+    if (!suite) { HISTO.page = 1; $('liste-histo').innerHTML = '<li class="vide">Chargement…</li>'; }
+    u.jwt().then(function (jeton) {
+      return fetch('/.netlify/git/github/commits?sha=main&per_page=25&page=' + HISTO.page, { headers: { Authorization: 'Bearer ' + jeton } });
+    }).then(function (r) { if (!r.ok) throw new Error('Historique indisponible (' + r.status + ')'); return r.json(); }).then(function (commits) {
+      var html = commits.map(function (c) {
+        var d = decrire(c.commit.message);
+        var lien = c.html_url ? '<a href="' + esc(c.html_url) + '" target="_blank" rel="noopener" title="Détail technique de cette version">' + c.sha.slice(0, 7) + '</a>' : c.sha.slice(0, 7);
+        return '<li class="' + (d.tech ? 'tech' : '') + '"><div class="quand">' + quand(c.commit.author.date) + '</div>' +
+          '<div class="quoi">' + esc(d.titre) + (d.tech ? '<span class="tag">technique</span>' : '') + '<small>' + lien + '</small></div>' +
+          '<div class="qui">' + esc(qui(c)) + '</div></li>';
+      }).join('');
+      if (suite) $('liste-histo').insertAdjacentHTML('beforeend', html); else $('liste-histo').innerHTML = html || '<li class="vide">Aucune modification enregistrée.</li>';
+      $('btn-plus-histo').hidden = commits.length < 25;
+    }).catch(function (e) { $('liste-histo').innerHTML = '<li class="vide">' + esc(e.message) + '</li>'; });
+  }
+  $('btn-plus-histo').addEventListener('click', function () { HISTO.page++; chargerHistorique(NI.currentUser(), true); });
+
+  // ---------- comptes ----------
   function appel(u, corps) {
     return u.jwt().then(function (jeton) {
       return fetch('/.netlify/functions/comptes', { method: 'POST', headers: { Authorization: 'Bearer ' + jeton, 'Content-Type': 'application/json' }, body: JSON.stringify(corps) });
@@ -233,23 +356,30 @@
   }
   function libelleEtat(c) {
     if (!c.confirme) return '<span class="etat non_confirme">e-mail non confirmé</span>';
-    if (c.roles.indexOf('maitre') >= 0) return '<span class="etat maitre">Maître</span>';
+    if (c.roles.indexOf('maitre') >= 0) return '<span class="etat maitre">' + GRAND + '</span>';
     if (c.roles.indexOf('admin') >= 0) return '<span class="etat admin">Administrateur</span>';
     return '<span class="etat en_attente">En attente de validation</span>';
   }
   function chargerComptes(u) {
+    var grand = estGrand(u);
+    $('comptes-note').textContent = grand ? '' : 'Seul le ' + GRAND + ' peut valider, suspendre ou supprimer des comptes.';
     appel(u, { action: 'lister' }).then(function (d) {
-      d.comptes.forEach(function (c) { c.roles = (c.roles || []).map(function (r) { return String(r).toLowerCase(); }); });
+      d.comptes.forEach(function (c) { c.roles = (c.roles || []).map(function (r) { return String(r).toLowerCase(); }); HISTO.comptes[(c.email || '').toLowerCase()] = c; });
       var attente = d.comptes.filter(function (c) { return c.roles.indexOf('admin') < 0 && c.roles.indexOf('maitre') < 0; });
-      $('comptes-alerte').hidden = attente.length === 0;
+      $('comptes-alerte').hidden = !(grand && attente.length);
       $('comptes-alerte').textContent = attente.length === 1 ? '1 compte attend votre validation.' : attente.length + ' comptes attendent votre validation.';
+      $('pastille-attente').hidden = !(grand && attente.length); $('pastille-attente').textContent = attente.length + ' à valider';
       $('liste-comptes').innerHTML = d.comptes.length ? d.comptes.map(function (c) {
         var maitre = c.roles.indexOf('maitre') >= 0, admin = c.roles.indexOf('admin') >= 0;
         var boutons = '';
-        if (!maitre && !admin) boutons = '<button class="btn btn-vert btn-petit" data-a="valider" data-id="' + c.id + '">Valider ce compte</button><button class="btn btn-rouge btn-petit" data-a="refuser" data-id="' + c.id + '">Refuser</button>';
-        else if (admin && !maitre) boutons = '<button class="btn btn-or btn-petit" data-a="transferer" data-id="' + c.id + '" data-nom="' + esc(c.nom || c.email) + '">Définir Maître</button><button class="btn btn-blanc btn-petit" data-a="retirer" data-id="' + c.id + '">Suspendre l’accès</button><button class="btn btn-rouge btn-petit" data-a="refuser" data-id="' + c.id + '">Supprimer</button>';
-        return '<div class="compte"><div><span class="nom">' + esc(c.nom || '(sans nom)') + '</span>' + libelleEtat(c) + '<div class="mail">' + esc(c.email) + (c.derniere_connexion ? ' · dernière connexion le ' + new Date(c.derniere_connexion).toLocaleDateString('fr-FR') : '') + '</div></div><div class="boutons">' + boutons + '</div></div>';
+        if (grand) {
+          if (!maitre && !admin) boutons = '<button class="btn btn-vert btn-petit" data-a="valider" data-id="' + c.id + '">Valider ce compte</button><button class="btn btn-rouge btn-petit" data-a="refuser" data-id="' + c.id + '">Refuser</button>';
+          else if (admin && !maitre) boutons = '<button class="btn btn-or btn-petit" data-a="transferer" data-id="' + c.id + '" data-nom="' + esc(c.nom || c.email) + '">Définir ' + GRAND + '</button><button class="btn btn-blanc btn-petit" data-a="retirer" data-id="' + c.id + '">Suspendre l’accès</button><button class="btn btn-rouge btn-petit" data-a="refuser" data-id="' + c.id + '">Supprimer</button>';
+        }
+        return '<div class="compte"><div><span class="nom">' + esc(c.nom || c.email) + '</span>' + libelleEtat(c) + '<div class="mail">' + esc(c.nom ? c.email : '') + (c.derniere_connexion ? (c.nom ? ' · ' : '') + 'dernière connexion le ' + new Date(c.derniere_connexion).toLocaleDateString('fr-FR') : '') + '</div></div><div class="boutons">' + boutons + '</div></div>';
       }).join('') : '<div class="vide">Aucun compte.</div>';
+      // l'historique peut maintenant afficher les noms des comptes
+      if ($('liste-histo').children.length) chargerHistorique(u, false);
     }).catch(function (e) {
       $('liste-comptes').innerHTML = '<div class="vide">' + esc(e.message) + '</div>';
     });
@@ -261,17 +391,23 @@
       valider: 'Valider ce compte ? La personne pourra modifier le site.',
       refuser: 'Supprimer définitivement ce compte ?',
       retirer: 'Suspendre l’accès de ce compte ?',
-      transferer: 'Définir ' + (b.dataset.nom || 'ce compte') + ' comme compte Maître ?\n\nCette personne pourra alors valider les nouveaux comptes à votre place.\nVotre compte redeviendra simple administrateur : vous pourrez toujours modifier le site, mais plus gérer les comptes. Seul le nouveau Maître pourra vous rendre ce rôle.'
+      transferer: 'Définir ' + (b.dataset.nom || 'ce compte') + ' comme ' + GRAND + ' ?\n\nCette personne pourra alors valider les nouveaux comptes à votre place.\nVotre compte redeviendra simple administrateur : vous pourrez toujours modifier le site, mais plus gérer les comptes. Seul le nouveau ' + GRAND + ' pourra vous rendre ce rôle.'
     }[b.dataset.a];
     if (!window.confirm(libelle)) return;
     b.disabled = true;
     appel(u, { action: b.dataset.a, id: b.dataset.id }).then(function (rep) {
       if (rep && rep.avertissement) { toast(rep.avertissement); }
-      else if (b.dataset.a === 'transferer') { toast('Rôle Maître transmis. Reconnexion…'); setTimeout(function () { NI.logout(); }, 2500); return; }
+      else if (b.dataset.a === 'transferer') { toast('Rôle transmis. Reconnexion…'); setTimeout(function () { NI.logout(); }, 2500); return; }
       else toast('C’est fait.');
       chargerComptes(u);
     }).catch(function (e) { toast('Erreur : ' + e.message); b.disabled = false; });
   });
+
+  // ---------- aide ----------
+  $('btn-aide').addEventListener('click', function () { $('aide').hidden = false; });
+  $('btn-fermer-aide').addEventListener('click', function () { $('aide').hidden = true; });
+  $('aide').addEventListener('click', function (e) { if (e.target === $('aide')) $('aide').hidden = true; });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') $('aide').hidden = true; });
 
   // ---------- connexion / inscription ----------
   $('btn-connexion').addEventListener('click', function () { NI.open('login'); });

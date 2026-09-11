@@ -29,10 +29,12 @@ slug:
   sanitize_replacement: "-"
 
 collections:
-  # ------------------------------------------------------------------ réglages généraux
-  - name: "reglages"
-    label: "Réglages généraux"
+  # ------------------------------------------------------------------ réglages du site (sans aperçu, pleine page)
+  - name: "site"
+    label: "Réglages du site"
     description: "Coordonnées, réseaux sociaux, pied de page, don, formulaire de contact, appel au don."
+    editor:
+      preview: false
     files:
       - name: "site"
         label: "Réglages du site"
@@ -60,6 +62,10 @@ collections:
           - { name: "appel_don_bouton", label: "Bloc « Aidez-nous » — texte du bouton", widget: "string" }
           - { name: "appel_don_lien", label: "Bloc « Aidez-nous » — lien du bouton", widget: "string", hint: "Ex. : don.html" }
 
+  # ------------------------------------------------------------------ page d'accueil (avec aperçu)
+  - name: "accueil"
+    label: "Page d'accueil"
+    files:
       - name: "accueil"
         label: "Page d'accueil"
         file: "site-esej-repo/content/accueil.json"

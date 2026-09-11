@@ -1,11 +1,11 @@
-/* Gestion des comptes administrateurs, réservée au compte Maître (rôle « maitre »).
+/* Gestion des comptes administrateurs, consultation par tout administrateur, actions par le Grand Administrateur (rôle « maitre »).
    Appelée depuis le tableau de bord (/admin/) avec le jeton de connexion de l'utilisateur.
    Actions (POST JSON) :
      { action: "lister" }                 -> liste des comptes et de leur statut
      { action: "valider", id }            -> le compte passe au rôle « admin » (accès complet)
      { action: "refuser", id }            -> le compte est supprimé
      { action: "retirer", id }            -> un admin repasse « en_attente » (accès suspendu)
-   Les rôles : maitre (trésorier, gère les comptes) · admin (peut tout modifier) · en_attente (rien). */
+   Les rôles : maitre (Grand Administrateur, gère les comptes) · admin (peut tout modifier) · en_attente (rien). */
 'use strict';
 
 const reply = (statusCode, data) => ({ statusCode, headers: { 'Content-Type': 'application/json; charset=utf-8' }, body: JSON.stringify(data) });
@@ -19,10 +19,14 @@ exports.handler = async (event, context) => {
   if (!appelant || !identity) return reply(401, { erreur: 'Connexion requise' });
 
   const rolesAppelant = ((appelant.app_metadata && appelant.app_metadata.roles) || []).map((r) => String(r).toLowerCase());
-  if (!rolesAppelant.includes('maitre')) return reply(403, { erreur: 'Réservé au compte Maître (trésorier)' });
+  const estAdmin = rolesAppelant.includes('admin') || rolesAppelant.includes('maitre');
+  const estGrand = rolesAppelant.includes('maitre');
+  if (!estAdmin) return reply(403, { erreur: 'Réservé aux administrateurs' });
 
   let body = {};
   try { body = JSON.parse(event.body || '{}'); } catch (e) { return reply(400, { erreur: 'Requête illisible' }); }
+  // la consultation est ouverte à tous les administrateurs ; les actions au seul Grand Administrateur
+  if (body.action !== 'lister' && !estGrand) return reply(403, { erreur: 'Réservé au Grand Administrateur' });
 
   const api = async (path, method, data) => {
     const r = await fetch(identity.url + path, {
@@ -59,21 +63,21 @@ exports.handler = async (event, context) => {
       }
       case 'retirer': {
         if (!body.id) return reply(400, { erreur: 'Identifiant manquant' });
-        if (body.id === appelant.sub) return reply(400, { erreur: 'Le compte Maître ne peut pas se retirer lui-même' });
+        if (body.id === appelant.sub) return reply(400, { erreur: 'Le Grand Administrateur ne peut pas se retirer lui-même' });
         const u = await api('/admin/users/' + body.id, 'PUT', { app_metadata: { roles: ['en_attente'] } });
         return reply(200, { compte: resume(u) });
       }
       case 'refuser': {
         if (!body.id) return reply(400, { erreur: 'Identifiant manquant' });
-        if (body.id === appelant.sub) return reply(400, { erreur: 'Le compte Maître ne peut pas se supprimer lui-même' });
+        if (body.id === appelant.sub) return reply(400, { erreur: 'Le Grand Administrateur ne peut pas se supprimer lui-même' });
         await api('/admin/users/' + body.id, 'DELETE');
         return reply(200, { supprime: body.id });
       }
       case 'transferer': {
-        // Transmission du rôle Maître à un autre compte : le nouveau devient « maitre »,
+        // Transmission du rôle de Grand Administrateur à un autre compte : le nouveau devient « maitre »,
         // l'ancien (celui qui fait la demande) redevient simple administrateur.
         if (!body.id) return reply(400, { erreur: 'Identifiant manquant' });
-        if (body.id === appelant.sub) return reply(400, { erreur: 'Ce compte est déjà le compte Maître' });
+        if (body.id === appelant.sub) return reply(400, { erreur: 'Ce compte est déjà le Grand Administrateur' });
         const cible = await api('/admin/users/' + body.id);
         if (!cible.confirmed_at) return reply(400, { erreur: 'Ce compte n’a pas encore confirmé son adresse e-mail' });
         const nouveau = await api('/admin/users/' + body.id, 'PUT', { app_metadata: { roles: ['maitre'] } });
@@ -81,8 +85,8 @@ exports.handler = async (event, context) => {
         try {
           ancien = await api('/admin/users/' + appelant.sub, 'PUT', { app_metadata: { roles: ['admin'] } });
         } catch (e) {
-          // Le nouveau Maître est en place ; on signale que l'ancien rôle n'a pas pu être retiré
-          return reply(200, { compte: resume(nouveau), avertissement: 'Nouveau compte Maître en place, mais l’ancien rôle n’a pas pu être retiré : ' + e.message });
+          // Le nouveau Grand Administrateur est en place ; on signale que l'ancien rôle n'a pas pu être retiré
+          return reply(200, { compte: resume(nouveau), avertissement: 'Nouveau Grand Administrateur en place, mais l’ancien rôle n’a pas pu être retiré : ' + e.message });
         }
         return reply(200, { compte: resume(nouveau), ancien: ancien ? resume(ancien) : null });
       }

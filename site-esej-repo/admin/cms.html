@@ -6,11 +6,17 @@
   <meta name="robots" content="noindex" />
   <title>Éditeur — École du Saint-Enfant-Jésus</title>
   <style>
+    #esej-voile{position:fixed;inset:0;z-index:2147483001;background:#f4f5f9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;font:600 15px Montserrat,Arial,sans-serif;color:#021d51;transition:opacity .25s}
+    #esej-voile img{width:120px}
+    #esej-voile.fin{opacity:0;pointer-events:none}
+    /* sans aperçu (réglages du site) : le formulaire occupe toute la largeur */
+    #nc-root [class*="ControlPaneContainer"]{max-width:none}
     #esej-retour{position:fixed;left:14px;bottom:14px;z-index:2147483000;background:#021d51;color:#fff;font:600 13px/1 Montserrat,Arial,sans-serif;padding:10px 14px;border-radius:999px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.25);opacity:.92}
     #esej-retour:hover{opacity:1}
   </style>
 </head>
 <body>
+  <div id="esej-voile"><img src="../wp-content/uploads/2025/10/esej-logo.png" alt="" /><div>Ouverture de l’éditeur…</div></div>
   <!-- Widget de connexion Netlify Identity -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
@@ -83,9 +89,34 @@
     (function () {
       var modeMedia = /[?&]media/.test(location.search), modeListe = /[?&]liste/.test(location.search);
       function estUneListe(h) { return h === '' || h === '#' || h === '#/' || h === '#/collections' || /^#\/collections\/[^/]+\/?$/.test(h) || /^#\/search\//.test(h); }
-      function verif() { if (!modeMedia && !modeListe && estUneListe(location.hash)) location.replace('./'); }
+      function versTableauDeBord() { var v = document.getElementById('esej-voile'); if (v) { v.classList.remove('fin'); v.lastElementChild.textContent = 'Retour au tableau de bord…'; } location.replace('./'); }
+      function verif() { if (!modeMedia && !modeListe && estUneListe(location.hash)) versTableauDeBord(); }
       window.addEventListener('hashchange', verif);
       verif();
+
+      // La flèche « retour » de l'éditeur (et tout lien vers une liste) mène directement au tableau de bord,
+      // après confirmation s'il reste des modifications non publiées.
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[href]'); if (!a || modeListe) return;
+        var h = a.getAttribute('href') || '';
+        if (!/^#\/collections\/[^/]+\/?$/.test(h) && h !== '#/') return;
+        e.preventDefault(); e.stopPropagation();
+        var modifie = false;
+        try { modifie = !!(window.esejEditeur && window.esejEditeur.modifie()); } catch (err) { /* ignore */ }
+        if (modifie && !window.confirm('Des modifications ne sont pas publiées. Quitter sans les publier ?')) return;
+        versTableauDeBord();
+      }, true);
+
+      // Voile de chargement : retiré dès que l'éditeur est affiché (évite l'écran de connexion intermédiaire)
+      var debut = Date.now();
+      var att = setInterval(function () {
+        var v = document.getElementById('esej-voile'); if (!v) { clearInterval(att); return; }
+        var pret = document.querySelector('[class*="ControlPaneContainer"], .SplitPane, [class*="EditorControlPane"], .ReactModal__Overlay');
+        var connexion = [].slice.call(document.querySelectorAll('button')).some(function (b) { return /Administrateur|Netlify Identity/i.test(b.textContent) && b.offsetParent; });
+        if (pret || (connexion && Date.now() - debut > 3500) || Date.now() - debut > 12000) {
+          if (!/Retour/.test(v.lastElementChild.textContent)) { v.classList.add('fin'); setTimeout(function () { v.remove(); }, 300); clearInterval(att); }
+        }
+      }, 120);
 
       // Libellé français du bouton de connexion ; ouverture directe de la médiathèque (cms.html?media),
       // puis retour au tableau de bord quand on la referme.

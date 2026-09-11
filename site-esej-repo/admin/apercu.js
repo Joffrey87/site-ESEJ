@@ -147,6 +147,9 @@
     return true;
   }
 
+  // Exposé à cms.html : y a-t-il des modifications non publiées ?
+  window.esejEditeur = { modifie: function () { var st = trouverStore(); return !!(st && st.getState().entryDraft && st.getState().entryDraft.get('hasChanged')); } };
+
   // HTML (saisie dans l'aperçu) -> markdown (valeur du champ)
   var td = null;
   function versMarkdown(html) {
