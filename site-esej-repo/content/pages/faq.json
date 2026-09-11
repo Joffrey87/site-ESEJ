@@ -1,15 +1,7 @@
 {
-  "slug": "faq",
   "titre_menu": "FAQ",
-  "ordre": 5,
-  "afficher_menu": true,
-  "pied_de_page": false,
-  "ordre_pied": 0,
-  "gabarit": "standard",
   "titre": "Foire aux",
   "titre_accent": "questions",
-  "description": "Foire aux questions : cantine, périscolaire, horaires, uniforme…",
-  "afficher_appel_don": true,
   "blocs": [
     {
       "type": "intro",
@@ -58,5 +50,14 @@
         }
       ]
     }
-  ]
+  ],
+  "reglages": {
+    "ordre": 5,
+    "afficher_menu": true,
+    "pied_de_page": false,
+    "ordre_pied": 0,
+    "gabarit": "standard",
+    "afficher_appel_don": true,
+    "description": "Foire aux questions : cantine, périscolaire, horaires, uniforme…"
+  }
 }

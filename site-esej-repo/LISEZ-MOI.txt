@@ -23,7 +23,7 @@ COMPTES ET RÔLES
     valide / refuse / suspend les comptes dans la rubrique « Comptes » du
     tableau de bord.
   - CHANGEMENT DE TRÉSORIER : le Maître en poste ouvre « Comptes », puis clique
-    « Lui confier le rôle Maître » sur la ligne du nouveau trésorier (son compte
+    « Définir Maître » sur la ligne du nouveau trésorier (son compte
     doit déjà exister et être validé). Le nouveau devient Maître, l'ancien
     redevient simple administrateur. Il n'y a qu'un seul compte Maître à la fois.
     En dernier recours (Maître perdu ou inaccessible), un responsable du compte
@@ -39,9 +39,15 @@ Dans l'éditeur :
   - « Réglages généraux » → Réglages du site : coordonnées, réseaux sociaux,
     pied de page, don HelloAsso, formulaire de contact, bloc « Aidez-nous », carte.
   - « Réglages généraux » → Page d'accueil : tous les textes et photos de l'accueil.
-  - « Pages » : chaque page du site. Bouton « Nouvelle page » pour en créer une
-    (choisir son adresse, son nom dans le menu, sa position, puis ajouter des blocs).
-    Pour supprimer une page : ouvrir la page → menu « … » → Supprimer.
+  - « Pages » : chaque page du site. L'écran de modification présente d'abord
+    ce qui se voit (nom de la page, grand titre, blocs de contenu de haut en
+    bas), avec l'APERÇU EN DIRECT de la page à droite, tel qu'elle s'affichera.
+    Tout en bas, la rubrique repliée « Réglages de la page » regroupe la partie
+    technique : position dans le menu, menu du haut / pied de page, type de
+    page, description pour Google.
+    « Nouvelle page » : le nom de la page donne son adresse (ex. « Nos
+    activités » → nos-activites.html). Pour supprimer une page : l'ouvrir →
+    bouton « Supprimer l'entrée ».
   - Les images se choisissent / se téléversent avec le bouton « Choisir une image ».
 
 Après « Publier », le site se met à jour tout seul en 1 à 2 minutes

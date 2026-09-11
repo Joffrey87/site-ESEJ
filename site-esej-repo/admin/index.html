@@ -247,7 +247,7 @@
         var maitre = c.roles.indexOf('maitre') >= 0, admin = c.roles.indexOf('admin') >= 0;
         var boutons = '';
         if (!maitre && !admin) boutons = '<button class="btn btn-vert btn-petit" data-a="valider" data-id="' + c.id + '">Valider ce compte</button><button class="btn btn-rouge btn-petit" data-a="refuser" data-id="' + c.id + '">Refuser</button>';
-        else if (admin && !maitre) boutons = '<button class="btn btn-or btn-petit" data-a="transferer" data-id="' + c.id + '" data-nom="' + esc(c.nom || c.email) + '">Lui confier le rôle Maître</button><button class="btn btn-blanc btn-petit" data-a="retirer" data-id="' + c.id + '">Suspendre l’accès</button><button class="btn btn-rouge btn-petit" data-a="refuser" data-id="' + c.id + '">Supprimer</button>';
+        else if (admin && !maitre) boutons = '<button class="btn btn-or btn-petit" data-a="transferer" data-id="' + c.id + '" data-nom="' + esc(c.nom || c.email) + '">Définir Maître</button><button class="btn btn-blanc btn-petit" data-a="retirer" data-id="' + c.id + '">Suspendre l’accès</button><button class="btn btn-rouge btn-petit" data-a="refuser" data-id="' + c.id + '">Supprimer</button>';
         return '<div class="compte"><div><span class="nom">' + esc(c.nom || '(sans nom)') + '</span>' + libelleEtat(c) + '<div class="mail">' + esc(c.email) + (c.derniere_connexion ? ' · dernière connexion le ' + new Date(c.derniere_connexion).toLocaleDateString('fr-FR') : '') + '</div></div><div class="boutons">' + boutons + '</div></div>';
       }).join('') : '<div class="vide">Aucun compte.</div>';
     }).catch(function (e) {
@@ -261,7 +261,7 @@
       valider: 'Valider ce compte ? La personne pourra modifier le site.',
       refuser: 'Supprimer définitivement ce compte ?',
       retirer: 'Suspendre l’accès de ce compte ?',
-      transferer: 'Confier le rôle Maître à ' + (b.dataset.nom || 'ce compte') + ' ?\n\nCette personne pourra alors valider les nouveaux comptes à votre place.\nVotre compte redeviendra simple administrateur : vous pourrez toujours modifier le site, mais plus gérer les comptes. Seul le nouveau Maître pourra vous rendre ce rôle.'
+      transferer: 'Définir ' + (b.dataset.nom || 'ce compte') + ' comme compte Maître ?\n\nCette personne pourra alors valider les nouveaux comptes à votre place.\nVotre compte redeviendra simple administrateur : vous pourrez toujours modifier le site, mais plus gérer les comptes. Seul le nouveau Maître pourra vous rendre ce rôle.'
     }[b.dataset.a];
     if (!window.confirm(libelle)) return;
     b.disabled = true;

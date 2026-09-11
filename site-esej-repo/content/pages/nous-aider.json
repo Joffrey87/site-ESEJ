@@ -1,15 +1,7 @@
 {
-  "slug": "nous-aider",
   "titre_menu": "Nous aider",
-  "ordre": 4,
-  "afficher_menu": true,
-  "pied_de_page": false,
-  "ordre_pied": 0,
-  "gabarit": "standard",
   "titre": "Nous",
   "titre_accent": "aider",
-  "description": "Les moyens de nous aider : prières, dons, bénévolat.",
-  "afficher_appel_don": true,
   "blocs": [
     {
       "type": "intro",
@@ -58,5 +50,14 @@
         }
       ]
     }
-  ]
+  ],
+  "reglages": {
+    "ordre": 4,
+    "afficher_menu": true,
+    "pied_de_page": false,
+    "ordre_pied": 0,
+    "gabarit": "standard",
+    "afficher_appel_don": true,
+    "description": "Les moyens de nous aider : prières, dons, bénévolat."
+  }
 }

@@ -20,7 +20,13 @@ media_folder: "site-esej-repo/wp-content/uploads/mediatheque"
 public_folder: "/wp-content/uploads/mediatheque"
 
 editor:
-  preview: false
+  preview: true
+
+# Adresses générées à partir du nom de la page : minuscules, sans accents, tirets
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "-"
 
 collections:
   # ------------------------------------------------------------------ réglages généraux
@@ -98,29 +104,23 @@ collections:
     format: "json"
     extension: "json"
     identifier_field: "titre_menu"
-    slug: "{{fields.slug}}"
-    summary: "{{titre_menu}}  —  {{slug}}.html  (menu : position {{ordre}})"
-    sortable_fields: ["ordre", "titre_menu"]
+    slug: "{{slug}}"
+    summary: "{{titre_menu}}"
+    sortable_fields: ["titre_menu"]
     fields:
-      - { name: "slug", label: "Adresse de la page", widget: "string", pattern: ["^[a-z0-9-]+$", "Lettres minuscules, chiffres et tirets uniquement (ex. : nos-activites)"], hint: "Donne l'adresse : nos-activites → nos-activites.html. À choisir à la création, ne plus changer ensuite." }
-      - { name: "titre_menu", label: "Nom dans le menu", widget: "string" }
-      - { name: "ordre", label: "Position dans le menu (1 = premier après Accueil)", widget: "number", value_type: "int", default: 10 }
-      - { name: "afficher_menu", label: "Afficher dans le menu du haut", widget: "boolean", default: true }
-      - { name: "pied_de_page", label: "Afficher dans le menu du pied de page", widget: "boolean", default: false }
-      - { name: "ordre_pied", label: "Position dans le pied de page", widget: "number", value_type: "int", default: 10, required: false }
-      - { name: "gabarit", label: "Type de page", widget: "select", default: "standard",
-          options: [ { label: "Page standard (composée de blocs)", value: "standard" }, { label: "Page Contact (coordonnées + carte + formulaire)", value: "contact" }, { label: "Page Don (HelloAsso + formulaire)", value: "don" } ] }
-      - { name: "titre", label: "Titre de la page — partie bleue", widget: "string" }
-      - { name: "titre_accent", label: "Titre de la page — partie dorée", widget: "string", required: false }
-      - { name: "description", label: "Description (référencement Google)", widget: "text", required: false }
-      - { name: "afficher_appel_don", label: "Afficher le bloc « Aidez-nous » en bas de page", widget: "boolean", default: true }
+      # ---------------------------------------------------------------- contenu visible
+      - { name: "titre_menu", label: "Nom de la page", widget: "string", hint: "Apparaît dans le menu et dans l'onglet du navigateur. Donne aussi l'adresse de la page à sa création (ex. « Nos activités » → nos-activites.html)." }
+      - { name: "titre", label: "Grand titre — partie bleue", widget: "string" }
+      - { name: "titre_accent", label: "Grand titre — partie dorée", widget: "string", required: false }
       - name: "blocs"
-        label: "Blocs de contenu (page standard)"
+        label: "Contenu de la page"
         label_singular: "bloc"
         widget: "list"
         required: false
-        collapsed: true
-        summary: "{{fields.type}} — {{fields.titre}} {{fields.titre_accent}} {{fields.titre1}}"
+        collapsed: false
+        minimize_collapsed: false
+        summary: "{{fields.titre}} {{fields.titre_accent}} {{fields.titre1}}"
+        hint: "La page se lit de haut en bas : ajoutez, réordonnez (poignée à gauche) ou supprimez des blocs. L'aperçu à droite se met à jour au fil de la saisie."
         types:
           - name: "intro"
             label: "Introduction sur photo de fond"
@@ -178,5 +178,26 @@ collections:
             widget: "object"
             fields:
               - { name: "texte", label: "Texte (utilisez les titres de niveau 2 pour les sections)", widget: "markdown" }
-      - { name: "contact_titre", label: "Pages Contact / Don — titre au-dessus du formulaire", widget: "string", required: false }
-      - { name: "contact_texte", label: "Pages Contact / Don — texte au-dessus du formulaire", widget: "markdown", required: false, buttons: ["bold", "italic", "link"], editor_components: [] }
+      # ---------------------------------------------------------------- réglages techniques (repliés)
+      - name: "reglages"
+        label: "Réglages de la page — menu, type de page, référencement"
+        widget: "object"
+        collapsed: true
+        summary: "Position {{fields.ordre}} · {{fields.gabarit}}"
+        fields:
+          - { name: "ordre", label: "Position dans le menu (1 = juste après Accueil)", widget: "number", value_type: "int", default: 10 }
+          - { name: "afficher_menu", label: "Dans le menu du haut", widget: "boolean", default: true }
+          - { name: "pied_de_page", label: "Dans le menu du pied de page", widget: "boolean", default: false }
+          - { name: "ordre_pied", label: "Position dans le pied de page", widget: "number", value_type: "int", default: 10, required: false }
+          - { name: "afficher_appel_don", label: "Bloc « Aidez-nous » en bas de page", widget: "boolean", default: true }
+          - { name: "gabarit", label: "Type de page", widget: "select", default: "standard",
+              options: [ { label: "Page standard (composée de blocs)", value: "standard" }, { label: "Page Contact (coordonnées + carte + formulaire)", value: "contact" }, { label: "Page Don (HelloAsso + formulaire)", value: "don" } ] }
+          - { name: "description", label: "Description pour Google (1 à 2 phrases)", widget: "text", required: false }
+      - name: "contact"
+        label: "Pages Contact et Don uniquement — texte au-dessus du formulaire"
+        widget: "object"
+        collapsed: true
+        required: false
+        fields:
+          - { name: "titre", label: "Titre", widget: "string", required: false }
+          - { name: "texte", label: "Texte", widget: "markdown", required: false, buttons: ["bold", "italic", "link"], editor_components: [] }

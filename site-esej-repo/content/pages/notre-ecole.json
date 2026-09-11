@@ -1,15 +1,7 @@
 {
-  "slug": "notre-ecole",
   "titre_menu": "Notre école",
-  "ordre": 2,
-  "afficher_menu": true,
-  "pied_de_page": false,
-  "ordre_pied": 0,
-  "gabarit": "standard",
   "titre": "Notre",
   "titre_accent": "école",
-  "description": "Une école catholique libre fondée en 2022 par des parents, de la PS au CM2, à Reims.",
-  "afficher_appel_don": true,
   "blocs": [
     {
       "type": "intro",
@@ -63,5 +55,14 @@
       "image_a_gauche": true,
       "fond": "clair"
     }
-  ]
+  ],
+  "reglages": {
+    "ordre": 2,
+    "afficher_menu": true,
+    "pied_de_page": false,
+    "ordre_pied": 0,
+    "gabarit": "standard",
+    "afficher_appel_don": true,
+    "description": "Une école catholique libre fondée en 2022 par des parents, de la PS au CM2, à Reims."
+  }
 }

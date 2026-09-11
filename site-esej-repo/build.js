@@ -38,6 +38,10 @@ const accueil = readJSON(path.join(ROOT, 'content', 'accueil.json'));
 const pagesDir = path.join(ROOT, 'content', 'pages');
 const pages = fs.readdirSync(pagesDir).filter((f) => f.endsWith('.json')).map((f) => {
   const p = readJSON(path.join(pagesDir, f));
+  // Les réglages techniques sont regroupés dans « reglages » et le texte des pages contact/don
+  // dans « contact » (anciens fichiers à plat toujours acceptés)
+  Object.assign(p, p.reglages || {});
+  if (p.contact) { p.contact_titre = p.contact.titre; p.contact_texte = p.contact.texte; }
   p.slug = slugify(path.basename(f, '.json')); // l'URL découle du nom de fichier créé par le CMS
   return p;
 });
@@ -153,6 +157,9 @@ fs.writeFileSync(path.join(DIST, 'admin', 'pages.json'), JSON.stringify({
     image: abs(imagePage(p) || site.logo), url: p.slug + '.html', dans_menu: p.afficher_menu !== false, blocs: (p.blocs || []).length,
   })),
 }, null, 2));
+
+// gabarits + réglages pour l'aperçu en direct de l'éditeur (admin/cms.html)
+fs.writeFileSync(path.join(DIST, 'admin', 'gabarits.json'), JSON.stringify({ blocs: B, site }));
 
 // page 404 sobre
 fs.writeFileSync(path.join(DIST, '404.html'), fill(shell, {

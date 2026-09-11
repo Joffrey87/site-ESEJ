@@ -1,15 +1,7 @@
 {
-  "slug": "notre-projet",
   "titre_menu": "Notre projet",
-  "ordre": 3,
-  "afficher_menu": true,
-  "pied_de_page": false,
-  "ordre_pied": 0,
-  "gabarit": "standard",
   "titre": "Notre",
   "titre_accent": "Projet",
-  "description": "Notre pédagogie : l'éducation intégrale, en maternelle et au primaire.",
-  "afficher_appel_don": true,
   "blocs": [
     {
       "type": "intro",
@@ -48,5 +40,14 @@
       "image_a_gauche": true,
       "fond": "clair"
     }
-  ]
+  ],
+  "reglages": {
+    "ordre": 3,
+    "afficher_menu": true,
+    "pied_de_page": false,
+    "ordre_pied": 0,
+    "gabarit": "standard",
+    "afficher_appel_don": true,
+    "description": "Notre pédagogie : l'éducation intégrale, en maternelle et au primaire."
+  }
 }
