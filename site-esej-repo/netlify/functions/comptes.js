@@ -69,6 +69,23 @@ exports.handler = async (event, context) => {
         await api('/admin/users/' + body.id, 'DELETE');
         return reply(200, { supprime: body.id });
       }
+      case 'transferer': {
+        // Transmission du rôle Maître à un autre compte : le nouveau devient « maitre »,
+        // l'ancien (celui qui fait la demande) redevient simple administrateur.
+        if (!body.id) return reply(400, { erreur: 'Identifiant manquant' });
+        if (body.id === appelant.sub) return reply(400, { erreur: 'Ce compte est déjà le compte Maître' });
+        const cible = await api('/admin/users/' + body.id);
+        if (!cible.confirmed_at) return reply(400, { erreur: 'Ce compte n’a pas encore confirmé son adresse e-mail' });
+        const nouveau = await api('/admin/users/' + body.id, 'PUT', { app_metadata: { roles: ['maitre'] } });
+        let ancien = null;
+        try {
+          ancien = await api('/admin/users/' + appelant.sub, 'PUT', { app_metadata: { roles: ['admin'] } });
+        } catch (e) {
+          // Le nouveau Maître est en place ; on signale que l'ancien rôle n'a pas pu être retiré
+          return reply(200, { compte: resume(nouveau), avertissement: 'Nouveau compte Maître en place, mais l’ancien rôle n’a pas pu être retiré : ' + e.message });
+        }
+        return reply(200, { compte: resume(nouveau), ancien: ancien ? resume(ancien) : null });
+      }
       default:
         return reply(400, { erreur: 'Action inconnue' });
     }

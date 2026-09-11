@@ -22,6 +22,13 @@ COMPTES ET RÔLES
   - Le compte Maître (trésorier) reçoit un e-mail à chaque inscription et
     valide / refuse / suspend les comptes dans la rubrique « Comptes » du
     tableau de bord.
+  - CHANGEMENT DE TRÉSORIER : le Maître en poste ouvre « Comptes », puis clique
+    « Lui confier le rôle Maître » sur la ligne du nouveau trésorier (son compte
+    doit déjà exister et être validé). Le nouveau devient Maître, l'ancien
+    redevient simple administrateur. Il n'y a qu'un seul compte Maître à la fois.
+    En dernier recours (Maître perdu ou inaccessible), un responsable du compte
+    Netlify peut réattribuer le rôle : Netlify → Identity → cliquer sur
+    l'utilisateur → Edit settings → Roles = maitre (en minuscules).
   - Rôles Netlify : maitre (trésorier), admin (peut tout modifier),
     en_attente (aucun droit). Réglages Netlify à conserver : Identity →
     Registration = Open ; Services → Git Gateway → Roles = admin, maitre ;

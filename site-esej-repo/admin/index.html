@@ -151,7 +151,7 @@
     </section>
 
     <section id="comptes" hidden>
-      <div class="titre"><h2>Comptes administrateurs</h2><p>Visible uniquement par le compte Maître (trésorier).</p></div>
+      <div class="titre"><h2>Comptes administrateurs</h2><p>Visible uniquement par le compte Maître (trésorier), qui valide les nouveaux comptes et peut transmettre son rôle.</p></div>
       <div id="comptes-alerte" class="alerte" hidden></div>
       <div class="comptes" id="liste-comptes"><div class="vide">Chargement…</div></div>
     </section>
@@ -247,7 +247,7 @@
         var maitre = c.roles.indexOf('maitre') >= 0, admin = c.roles.indexOf('admin') >= 0;
         var boutons = '';
         if (!maitre && !admin) boutons = '<button class="btn btn-vert btn-petit" data-a="valider" data-id="' + c.id + '">Valider ce compte</button><button class="btn btn-rouge btn-petit" data-a="refuser" data-id="' + c.id + '">Refuser</button>';
-        else if (admin && !maitre) boutons = '<button class="btn btn-blanc btn-petit" data-a="retirer" data-id="' + c.id + '">Suspendre l’accès</button><button class="btn btn-rouge btn-petit" data-a="refuser" data-id="' + c.id + '">Supprimer</button>';
+        else if (admin && !maitre) boutons = '<button class="btn btn-or btn-petit" data-a="transferer" data-id="' + c.id + '" data-nom="' + esc(c.nom || c.email) + '">Lui confier le rôle Maître</button><button class="btn btn-blanc btn-petit" data-a="retirer" data-id="' + c.id + '">Suspendre l’accès</button><button class="btn btn-rouge btn-petit" data-a="refuser" data-id="' + c.id + '">Supprimer</button>';
         return '<div class="compte"><div><span class="nom">' + esc(c.nom || '(sans nom)') + '</span>' + libelleEtat(c) + '<div class="mail">' + esc(c.email) + (c.derniere_connexion ? ' · dernière connexion le ' + new Date(c.derniere_connexion).toLocaleDateString('fr-FR') : '') + '</div></div><div class="boutons">' + boutons + '</div></div>';
       }).join('') : '<div class="vide">Aucun compte.</div>';
     }).catch(function (e) {
@@ -257,11 +257,20 @@
   document.addEventListener('click', function (ev) {
     var b = ev.target.closest('button[data-a]'); if (!b) return;
     var u = NI.currentUser(); if (!u) return;
-    var libelle = { valider: 'Valider ce compte ? La personne pourra modifier le site.', refuser: 'Supprimer définitivement ce compte ?', retirer: 'Suspendre l’accès de ce compte ?' }[b.dataset.a];
+    var libelle = {
+      valider: 'Valider ce compte ? La personne pourra modifier le site.',
+      refuser: 'Supprimer définitivement ce compte ?',
+      retirer: 'Suspendre l’accès de ce compte ?',
+      transferer: 'Confier le rôle Maître à ' + (b.dataset.nom || 'ce compte') + ' ?\n\nCette personne pourra alors valider les nouveaux comptes à votre place.\nVotre compte redeviendra simple administrateur : vous pourrez toujours modifier le site, mais plus gérer les comptes. Seul le nouveau Maître pourra vous rendre ce rôle.'
+    }[b.dataset.a];
     if (!window.confirm(libelle)) return;
     b.disabled = true;
-    appel(u, { action: b.dataset.a, id: b.dataset.id }).then(function () { toast('C’est fait.'); chargerComptes(u); })
-      .catch(function (e) { toast('Erreur : ' + e.message); b.disabled = false; });
+    appel(u, { action: b.dataset.a, id: b.dataset.id }).then(function (rep) {
+      if (rep && rep.avertissement) { toast(rep.avertissement); }
+      else if (b.dataset.a === 'transferer') { toast('Rôle Maître transmis. Reconnexion…'); setTimeout(function () { NI.logout(); }, 2500); return; }
+      else toast('C’est fait.');
+      chargerComptes(u);
+    }).catch(function (e) { toast('Erreur : ' + e.message); b.disabled = false; });
   });
 
   // ---------- connexion / inscription ----------
