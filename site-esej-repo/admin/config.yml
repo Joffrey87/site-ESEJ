@@ -111,7 +111,6 @@ collections:
     extension: "json"
     identifier_field: "titre_menu"
     slug: "{{slug}}"
-    preview_path: "{{slug}}.html"
     summary: "{{titre_menu}}"
     sortable_fields: ["titre_menu"]
     fields:
