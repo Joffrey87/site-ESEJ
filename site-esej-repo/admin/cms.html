@@ -28,6 +28,14 @@
       netlifyIdentity.on('logout', function () { location.replace('./'); });
     })();
   </script>
+  <script>
+    // Partage de l'écran à l'ouverture : 40 % pour le formulaire (gauche), 60 % pour l'aperçu (droite).
+    // La poignée centrale reste utilisable pour ajuster ponctuellement.
+    try {
+      localStorage.setItem('cms.split-pane-position', String(Math.round(window.innerWidth * 0.4)));
+      localStorage.setItem('cms.preview-visible', 'true');
+    } catch (e) { /* stockage indisponible : partage par défaut */ }
+  </script>
   <!-- Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.3.3/dist/decap-cms.js"></script>
   <!-- Aperçu en direct : rendu de la page avec les gabarits et le style du site -->
