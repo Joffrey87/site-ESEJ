@@ -105,6 +105,7 @@ collections:
     extension: "json"
     identifier_field: "titre_menu"
     slug: "{{slug}}"
+    preview_path: "{{slug}}.html"
     summary: "{{titre_menu}}"
     sortable_fields: ["titre_menu"]
     fields:
@@ -117,10 +118,10 @@ collections:
         label_singular: "bloc"
         widget: "list"
         required: false
-        collapsed: false
+        collapsed: true
         minimize_collapsed: false
         summary: "{{fields.titre}} {{fields.titre_accent}} {{fields.titre1}}"
-        hint: "La page se lit de haut en bas : ajoutez, réordonnez (poignée à gauche) ou supprimez des blocs. L'aperçu à droite se met à jour au fil de la saisie."
+        hint: "Chaque ligne est une section de la page, de haut en bas. Cliquez sur une ligne pour la modifier, glissez la poignée pour réordonner, « Ajouter » pour une nouvelle section. L'aperçu à droite suit la saisie."
         types:
           - name: "intro"
             label: "Introduction sur photo de fond"
@@ -128,7 +129,7 @@ collections:
             fields:
               - { name: "titre", label: "Titre — partie bleue", widget: "string" }
               - { name: "titre_accent", label: "Titre — partie dorée", widget: "string", required: false }
-              - { name: "texte", label: "Texte", widget: "markdown" }
+              - { name: "texte", label: "Texte", widget: "markdown", buttons: ["bold", "italic", "link", "bulleted-list", "numbered-list"], editor_components: [] }
               - { name: "image_fond", label: "Photo de fond (large, ex. 1400×800)", widget: "image", required: false }
           - name: "texte_image"
             label: "Texte + image"
@@ -136,7 +137,7 @@ collections:
             fields:
               - { name: "titre", label: "Titre — partie bleue", widget: "string" }
               - { name: "titre_accent", label: "Titre — partie dorée (ou blanche sur fond doré)", widget: "string", required: false }
-              - { name: "texte", label: "Texte", widget: "markdown" }
+              - { name: "texte", label: "Texte", widget: "markdown", buttons: ["bold", "italic", "link", "bulleted-list", "numbered-list"], editor_components: [] }
               - { name: "image", label: "Image (carrée de préférence, ex. 800×800)", widget: "image" }
               - { name: "image_alt", label: "Description de l'image", widget: "string", required: false }
               - { name: "image_a_gauche", label: "Image à gauche du texte", widget: "boolean", default: false }
@@ -147,17 +148,17 @@ collections:
             fields:
               - { name: "titre", label: "Titre — partie bleue", widget: "string" }
               - { name: "titre_accent", label: "Titre — partie dorée", widget: "string", required: false }
-              - { name: "texte", label: "Texte", widget: "markdown" }
+              - { name: "texte", label: "Texte", widget: "markdown", buttons: ["bold", "italic", "link", "bulleted-list", "numbered-list"], editor_components: [] }
           - name: "deux_colonnes"
             label: "Deux colonnes de texte"
             widget: "object"
             fields:
               - { name: "titre1", label: "Colonne 1 — titre (bleu)", widget: "string" }
               - { name: "titre_accent1", label: "Colonne 1 — titre (doré)", widget: "string", required: false }
-              - { name: "texte1", label: "Colonne 1 — texte", widget: "markdown" }
+              - { name: "texte1", label: "Colonne 1 — texte", widget: "markdown", buttons: ["bold", "italic", "link", "bulleted-list", "numbered-list"], editor_components: [] }
               - { name: "titre2", label: "Colonne 2 — titre (bleu)", widget: "string" }
               - { name: "titre_accent2", label: "Colonne 2 — titre (doré)", widget: "string", required: false }
-              - { name: "texte2", label: "Colonne 2 — texte", widget: "markdown" }
+              - { name: "texte2", label: "Colonne 2 — texte", widget: "markdown", buttons: ["bold", "italic", "link", "bulleted-list", "numbered-list"], editor_components: [] }
           - name: "liste_promos"
             label: "Liste numérotée avec images (questions/réponses, moyens d'aider…)"
             widget: "object"
@@ -170,14 +171,14 @@ collections:
                 fields:
                   - { name: "numero", label: "Numéro (laisser vide = automatique)", widget: "string", required: false }
                   - { name: "titre", label: "Titre", widget: "string" }
-                  - { name: "texte", label: "Texte", widget: "markdown" }
+                  - { name: "texte", label: "Texte", widget: "markdown", buttons: ["bold", "italic", "link", "bulleted-list", "numbered-list"], editor_components: [] }
                   - { name: "image", label: "Image (carrée)", widget: "image" }
                   - { name: "image_alt", label: "Description de l'image", widget: "string", required: false }
           - name: "texte_long"
             label: "Texte long (mentions légales, règlement…)"
             widget: "object"
             fields:
-              - { name: "texte", label: "Texte (utilisez les titres de niveau 2 pour les sections)", widget: "markdown" }
+              - { name: "texte", label: "Texte (utilisez les titres de niveau 2 pour les sections)", widget: "markdown", buttons: ["bold", "italic", "link", "heading-two", "heading-three", "bulleted-list", "numbered-list"], editor_components: [] }
       # ---------------------------------------------------------------- réglages techniques (repliés)
       - name: "reglages"
         label: "Réglages de la page — menu, type de page, référencement"
@@ -198,6 +199,7 @@ collections:
         widget: "object"
         collapsed: true
         required: false
+        summary: "Titre et texte (déplier pour modifier)"
         fields:
           - { name: "titre", label: "Titre", widget: "string", required: false }
           - { name: "texte", label: "Texte", widget: "markdown", required: false, buttons: ["bold", "italic", "link"], editor_components: [] }

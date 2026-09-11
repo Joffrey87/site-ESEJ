@@ -35,16 +35,30 @@
   <script src="apercu.js"></script>
   <a id="esej-retour" href="./">← Tableau de bord</a>
   <script>
-    // Libellé français du bouton de connexion, et ouverture directe de la médiathèque (cms.html?media)
+    // Navigation : l'éditeur ne sert qu'à modifier une page ou un réglage. Ses écrans de liste
+    // (« collections ») ramènent au tableau de bord, sauf si on les demande explicitement (cms.html?liste).
     (function () {
+      var modeMedia = /[?&]media/.test(location.search), modeListe = /[?&]liste/.test(location.search);
+      function estUneListe(h) { return h === '' || h === '#' || h === '#/' || h === '#/collections' || /^#\/collections\/[^/]+\/?$/.test(h) || /^#\/search\//.test(h); }
+      function verif() { if (!modeMedia && !modeListe && estUneListe(location.hash)) location.replace('./'); }
+      window.addEventListener('hashchange', verif);
+      verif();
+
+      // Libellé français du bouton de connexion ; ouverture directe de la médiathèque (cms.html?media),
+      // puis retour au tableau de bord quand on la referme.
       var LABEL = 'Se connecter au compte Administrateur';
-      var openMedia = /[?&]media/.test(location.search);
+      var mediaOuverte = false, dernierClic = 0;
       function tick() {
         document.querySelectorAll('button').forEach(function (b) {
           var t = (b.textContent || '').trim();
           if (/netlify identity/i.test(t) && t !== LABEL) b.textContent = LABEL;
-          if (openMedia && /^(m[ée]dia|media)s?$/i.test(t)) { openMedia = false; b.click(); }
+          if (modeMedia && !mediaOuverte && /^(m[ée]dia|media)s?$/i.test(t) && Date.now() - dernierClic > 1500) { dernierClic = Date.now(); b.click(); }
         });
+        if (modeMedia) {
+          var modale = document.querySelector('.ReactModal__Overlay, .ReactModal__Content, [role="dialog"]');
+          if (modale) mediaOuverte = true;
+          else if (mediaOuverte) location.replace('./');
+        }
       }
       new MutationObserver(tick).observe(document.documentElement, { childList: true, subtree: true });
       tick();
