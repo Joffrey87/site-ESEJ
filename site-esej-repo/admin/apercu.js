@@ -215,7 +215,7 @@
         var self = this; this._fin = this._fin || function () { self.forceUpdate(); }; EDIT.onFin = this._fin;
       },
       render: function () {
-        if (!G.blocs) return h('div', { style: { padding: '40px', fontFamily: 'Montserrat, sans-serif', color: '#021d51' } }, 'Chargement de l’aperçu…');
+        if (!G.blocs || !this.props.entry || !this.props.entry.getIn) return h('div', { style: { padding: '40px', fontFamily: 'Montserrat, sans-serif', color: '#021d51' } }, 'Chargement de l’aperçu…');
         // pendant une saisie dans l'aperçu, on ne touche pas au DOM (le curseur resterait sinon perdu)
         if (EDIT.actif && this._html) return h('div', { dangerouslySetInnerHTML: { __html: this._html } });
         var data = this.props.entry.getIn(['data']); data = data && data.toJS ? data.toJS() : (data || {});
