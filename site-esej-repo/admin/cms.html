@@ -40,6 +40,8 @@
     try {
       localStorage.setItem('cms.split-pane-position', String(Math.round(window.innerWidth * 0.3)));
       localStorage.setItem('cms.preview-visible', 'true');
+      // le défilement synchronisé de Decap est incompatible avec l'aperçu mis à l'échelle
+      localStorage.setItem('cms.scroll-sync-enabled', 'false');
     } catch (e) { /* stockage indisponible : partage par défaut */ }
   </script>
   <!-- Decap CMS (version figée : l'aperçu modifiable s'appuie sur sa structure interne) -->
@@ -66,8 +68,7 @@
         derniereSignature = signature; ajuster.dernierCadre = fr;
         var k = r.width / LARGEUR_PAGE;
         volet.style.minWidth = '0'; volet.style.overflow = 'hidden';
-        conteneur.style.overflow = 'hidden'; conteneur.style.position = 'relative'; conteneur.style.width = '100%'; conteneur.style.height = '100%';
-        fr.style.position = 'absolute'; fr.style.left = '0'; fr.style.top = '0';
+        conteneur.style.overflow = 'hidden';
         fr.style.width = LARGEUR_PAGE + 'px';
         fr.style.height = Math.round(r.height / k) + 'px';
         fr.style.transform = 'scale(' + k + ')';

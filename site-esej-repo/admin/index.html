@@ -19,13 +19,12 @@
 
     /* ---------- en-tête ---------- */
     header{background:var(--bleu);color:#fff;background-image:radial-gradient(ellipse at 15% 120%,rgba(229,174,71,.28),transparent 55%)}
-    header .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;min-height:82px;padding-top:10px;padding-bottom:10px}
+    header .wrap{display:flex;align-items:center;gap:18px;min-height:82px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
     header .marque{display:flex;align-items:center;gap:14px}
     header img{width:58px;height:58px;border-radius:50%;background:#fff;padding:3px}
     header h1{font-size:18px;margin:0;font-weight:700;letter-spacing:.2px}
     header h1 small{display:block;font-size:12px;font-weight:500;opacity:.8;margin-top:2px}
-    header .centre{justify-self:center}
-    header .actions{justify-self:end;display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    header .actions{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
     .btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:10px 18px;font-weight:600;font-size:14px;text-decoration:none;transition:transform .12s,box-shadow .12s;white-space:nowrap}
     .btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(2,29,81,.18)}
     .btn-or{background:var(--or);color:var(--bleu)}
@@ -35,7 +34,6 @@
     .btn-petit{padding:7px 13px;font-size:13px}
     .btn-vert{background:var(--vert);color:#fff}
     .btn-rouge{background:#fff;color:var(--rouge);border:1px solid #f1c7c1}
-    .btn-grand{padding:13px 26px;font-size:15px}
 
     /* ---------- accueil / connexion ---------- */
     .porte{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;background:var(--fond)}
@@ -76,25 +74,19 @@
     .outils{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
 
     /* ---------- menu administrateur ---------- */
-    .menu-admin{background:#fff;border-radius:16px;border:1px solid var(--ligne);overflow:hidden}
-    .menu-admin > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:16px 20px;font-weight:800;color:var(--bleu);font-size:17px;user-select:none}
-    .menu-admin > summary::-webkit-details-marker{display:none}
-    .menu-admin > summary .chev{margin-left:auto;transition:transform .2s;color:var(--gris)}
-    .menu-admin[open] > summary .chev{transform:rotate(180deg)}
-    .menu-admin > summary .pastille{background:var(--rouge);color:#fff;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px}
-    .onglets{display:flex;gap:4px;padding:0 14px;border-top:1px solid var(--ligne);border-bottom:1px solid var(--ligne);background:#fafbfd}
-    .onglets button{background:none;border:0;padding:12px 14px;font-weight:600;color:var(--gris);border-bottom:3px solid transparent;margin-bottom:-1px}
-    .onglets button.actif{color:var(--bleu);border-bottom-color:var(--or)}
-    .onglets .droite{margin-left:auto;align-self:center;font-size:12.5px;color:var(--gris);padding-right:6px}
-    .panneau{padding:6px 0 0}
+    .carte.outil .pastille{background:var(--rouge);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;margin-left:8px;vertical-align:middle;white-space:nowrap}
+    .retour-tdb{display:inline-flex;align-items:center;gap:8px;background:none;border:0;color:var(--bleu);font-weight:600;padding:0;margin-bottom:14px}
+    .bloc{background:#fff;border-radius:16px;border:1px solid var(--ligne);overflow:hidden;margin-bottom:22px}
+    .bloc > h3{margin:0;padding:15px 20px;font-size:16px;color:var(--bleu);border-bottom:1px solid var(--ligne);background:#fafbfd;display:flex;align-items:center;gap:10px}
+    .bloc > h3 .droite{margin-left:auto;font-weight:500;font-size:12.5px;color:var(--gris)}
     .histo{list-style:none;margin:0;padding:0}
-    .histo li{display:grid;grid-template-columns:150px 1fr auto;gap:14px;align-items:start;padding:12px 20px;border-top:1px solid var(--ligne);font-size:14px}
+    .histo li{display:grid;grid-template-columns:150px 1fr auto;gap:14px;align-items:center;padding:12px 20px;border-top:1px solid var(--ligne);font-size:14px}
     .histo li:first-child{border-top:0}
     .histo .quand{color:var(--gris);font-size:13px;line-height:1.35}
     .histo .quand b{display:block;color:var(--texte);font-weight:600}
     .histo .quoi{font-weight:600;color:var(--bleu)}
     .histo .quoi small{display:block;font-weight:400;color:var(--gris);font-size:12.5px;margin-top:2px}
-    .histo .qui{font-size:12.5px;color:var(--gris);text-align:right;white-space:nowrap}
+    .histo .qui{font-size:12.5px;color:var(--gris);text-align:right;white-space:nowrap;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
     .histo .tech .quoi{color:var(--gris);font-weight:500}
     .histo .tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 7px;border-radius:999px;background:#eef1f8;color:var(--gris);margin-left:6px;vertical-align:middle}
     .compte{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;padding:14px 20px;border-top:1px solid var(--ligne)}
@@ -107,6 +99,7 @@
     .alerte{background:#fff7e8;border:1px solid #f3dfb4;padding:12px 20px;color:#6b4d0c;font-size:14px}
     .vide{padding:18px 20px;color:var(--gris);font-size:14px}
     .plus-histo{display:block;width:100%;background:#fafbfd;border:0;border-top:1px solid var(--ligne);padding:12px;color:var(--bleu);font-weight:600}
+    .histo-ferme{padding:18px 20px;color:var(--gris);font-size:14px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
     footer{color:var(--gris);font-size:12.5px;text-align:center;padding:10px 20px 30px}
 
     /* ---------- aide ---------- */
@@ -151,8 +144,8 @@
         <img src="../wp-content/uploads/2025/10/esej-logo.png" alt="" />
         <h1>Administration du site<small id="salut">École du Saint-Enfant-Jésus</small></h1>
       </div>
-      <div class="centre"><a class="btn btn-or btn-grand" href="cms.html#/collections/pages/new">+ Nouvelle page</a></div>
       <div class="actions">
+        <a class="btn btn-or" href="cms.html#/collections/pages/new">+ Nouvelle page</a>
         <a class="btn btn-ghost" href="../" target="_blank" rel="noopener">Voir le site ↗</a>
         <button class="btn btn-ghost" id="btn-aide">Aide ?</button>
         <button class="btn btn-ghost" id="btn-deconnexion">Se déconnecter</button>
@@ -168,6 +161,10 @@
     <section id="outils">
       <div class="titre"><h2>Réglages et médias</h2></div>
       <div class="grille outils">
+        <a class="carte outil" href="#admin" id="carte-admin">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <div><h3>Menu administrateur<span class="pastille" id="pastille-attente" hidden></span></h3><div class="sous">Comptes administrateurs et historique des modifications du site.</div></div>
+        </a>
         <a class="carte outil" href="cms.html#/collections/site/entries/site">
           <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></div>
           <div><h3>Réglages du site</h3><div class="sous">Coordonnées, téléphone, e-mail, réseaux sociaux, pied de page, appel au don, formulaire.</div></div>
@@ -179,29 +176,25 @@
       </div>
     </section>
 
-    <section id="admin">
-      <details class="menu-admin" id="menu-admin">
-        <summary>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
-          Menu administrateur
-          <span class="pastille" id="pastille-attente" hidden></span>
-          <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-        </summary>
-        <div class="onglets">
-          <button class="actif" data-onglet="historique">Historique des modifications</button>
-          <button data-onglet="comptes">Comptes</button>
-          <a class="droite" href="cms.html?liste#/collections/pages">Vue liste de l’éditeur (avancé)</a>
+    <section id="admin" hidden>
+      <button class="retour-tdb" id="btn-retour-tdb">← Retour au tableau de bord</button>
+      <div class="titre"><h2>Menu administrateur</h2></div>
+
+      <div class="bloc">
+        <h3>Comptes administrateurs<span class="droite" id="comptes-note"></span></h3>
+        <div id="comptes-alerte" class="alerte" hidden></div>
+        <div id="liste-comptes"><div class="vide">Chargement…</div></div>
+      </div>
+
+      <div class="bloc">
+        <h3>Historique des modifications<a class="droite" href="cms.html?liste#/collections/pages">Vue liste de l’éditeur (avancé)</a></h3>
+        <div class="histo-ferme" id="histo-ferme">
+          Chaque publication est conservée : vous pouvez consulter qui a modifié quoi, et revenir à l’état précédent d’une page.
+          <button class="btn btn-blanc btn-petit" id="btn-voir-histo">Afficher l’historique</button>
         </div>
-        <div class="panneau" id="panneau-historique">
-          <ul class="histo" id="liste-histo"><li class="vide">Chargement…</li></ul>
-          <button class="plus-histo" id="btn-plus-histo" hidden>Voir plus</button>
-        </div>
-        <div class="panneau" id="panneau-comptes" hidden>
-          <div id="comptes-alerte" class="alerte" hidden></div>
-          <div id="liste-comptes"><div class="vide">Chargement…</div></div>
-          <div class="vide" id="comptes-note"></div>
-        </div>
-      </details>
+        <ul class="histo" id="liste-histo" hidden></ul>
+        <button class="plus-histo" id="btn-plus-histo" hidden>Voir plus</button>
+      </div>
     </section>
   </main>
   <footer>Mode édition du site de l’École du Saint-Enfant-Jésus</footer>
@@ -230,8 +223,8 @@
       <li>Toute personne peut créer un compte depuis l’écran de connexion ; il reste inactif jusqu’à validation par le <strong>Grand Administrateur</strong> (Menu administrateur → Comptes).</li>
       <li>Le Grand Administrateur peut transmettre son rôle (« Définir Grand Administrateur ») ; il n’y en a qu’un à la fois.</li>
     </ul>
-    <h3>Historique</h3>
-    <p>Le Menu administrateur liste chaque publication : date, auteur, page concernée. Rien n’est jamais perdu : chaque version est conservée.</p>
+    <h3>Historique et retour en arrière</h3>
+    <p>« Réglages et médias » → <strong>Menu administrateur</strong> → <em>Afficher l’historique</em> : chaque publication y figure avec sa date, son auteur et la page concernée. Le bouton <strong>Annuler cette modification</strong> remet le contenu concerné dans l’état qui précédait cette publication ; les modifications faites depuis sur d’autres pages sont conservées. Rien n’est jamais perdu : une annulation est elle-même une nouvelle version, annulable à son tour.</p>
   </div>
 </div>
 
@@ -266,10 +259,19 @@
     }
     $('ecran-porte').hidden = true; $('ecran-tdb').hidden = false;
     $('salut').textContent = 'Bonjour ' + nom(u) + (estGrand(u) ? ' · ' + GRAND : '');
-    chargerPages().then(function () { chargerHistorique(u, false); });
+    chargerPages();
     chargerComptes(u);
-    if (location.hash === '#comptes') { $('menu-admin').open = true; ongletActif('comptes'); setTimeout(function () { $('menu-admin').scrollIntoView({ behavior: 'smooth' }); }, 300); }
+    vue();
   }
+
+  // ---------- vue : tableau de bord ou menu administrateur ----------
+  function vue() {
+    var admin = /^#(admin|comptes)$/.test(location.hash);
+    $('pages').hidden = admin; $('outils').hidden = admin; $('admin').hidden = !admin;
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', vue);
+  $('btn-retour-tdb').addEventListener('click', function () { location.hash = ''; if (!/^#(admin|comptes)$/.test(location.hash)) vue(); });
 
   // ---------- vignettes des pages ----------
   function carte(p, lienEdition) {
@@ -290,14 +292,6 @@
       $('grille-pages').innerHTML = html;
     }).catch(function () { $('grille-pages').innerHTML = '<div class="vide">Impossible de charger la liste des pages.</div>'; });
   }
-
-  // ---------- menu administrateur : onglets ----------
-  function ongletActif(nomOnglet) {
-    document.querySelectorAll('.onglets button').forEach(function (b) { b.classList.toggle('actif', b.dataset.onglet === nomOnglet); });
-    $('panneau-historique').hidden = nomOnglet !== 'historique';
-    $('panneau-comptes').hidden = nomOnglet !== 'comptes';
-  }
-  document.querySelectorAll('.onglets button').forEach(function (b) { b.addEventListener('click', function () { ongletActif(b.dataset.onglet); }); });
 
   // ---------- historique des modifications (commits du dépôt, via Git Gateway) ----------
   var HISTO = { page: 1, comptes: {} };
@@ -331,6 +325,7 @@
     return a.name || email || '—';
   }
   function chargerHistorique(u, suite) {
+    $('liste-histo').hidden = false; $('histo-ferme').hidden = true;
     if (!suite) { HISTO.page = 1; $('liste-histo').innerHTML = '<li class="vide">Chargement…</li>'; }
     u.jwt().then(function (jeton) {
       return fetch('/.netlify/git/github/commits?sha=main&per_page=25&page=' + HISTO.page, { headers: { Authorization: 'Bearer ' + jeton } });
@@ -338,15 +333,74 @@
       var html = commits.map(function (c) {
         var d = decrire(c.commit.message);
         var lien = c.html_url ? '<a href="' + esc(c.html_url) + '" target="_blank" rel="noopener" title="Détail technique de cette version">' + c.sha.slice(0, 7) + '</a>' : c.sha.slice(0, 7);
+        var bouton = d.tech ? '' : '<button class="btn btn-blanc btn-petit" data-revenir="' + c.sha + '" data-quoi="' + esc(d.titre) + '">Annuler cette modification</button>';
         return '<li class="' + (d.tech ? 'tech' : '') + '"><div class="quand">' + quand(c.commit.author.date) + '</div>' +
           '<div class="quoi">' + esc(d.titre) + (d.tech ? '<span class="tag">technique</span>' : '') + '<small>' + lien + '</small></div>' +
-          '<div class="qui">' + esc(qui(c)) + '</div></li>';
+          '<div class="qui">' + esc(qui(c)) + bouton + '</div></li>';
       }).join('');
       if (suite) $('liste-histo').insertAdjacentHTML('beforeend', html); else $('liste-histo').innerHTML = html || '<li class="vide">Aucune modification enregistrée.</li>';
       $('btn-plus-histo').hidden = commits.length < 25;
     }).catch(function (e) { $('liste-histo').innerHTML = '<li class="vide">' + esc(e.message) + '</li>'; });
   }
   $('btn-plus-histo').addEventListener('click', function () { HISTO.page++; chargerHistorique(NI.currentUser(), true); });
+  $('btn-voir-histo').addEventListener('click', function () { chargerHistorique(NI.currentUser(), false); });
+
+  // ---------- revenir sur une modification (restauration du contenu d'avant) ----------
+  var CONTENU = /^site-esej-repo\/(content|wp-content\/uploads)\//;
+  function git(u, chemin, options) {
+    return u.jwt().then(function (jeton) {
+      var o = options || {};
+      return fetch('/.netlify/git/github' + chemin, { method: o.method || 'GET', headers: { Authorization: 'Bearer ' + jeton, 'Content-Type': 'application/json' }, body: o.body ? JSON.stringify(o.body) : undefined });
+    }).then(function (r) {
+      if (r.status === 404) return null;
+      return r.json().then(function (j) { if (!r.ok) throw new Error((j && (j.message || j.msg)) || ('Erreur ' + r.status)); return j; });
+    });
+  }
+  function revenir(u, sha, quoi, bouton) {
+    bouton.disabled = true; bouton.textContent = 'Vérification…';
+    var detail;
+    git(u, '/commits/' + sha).then(function (c) {
+      detail = c;
+      var fichiers = (c.files || []).filter(function (f) { return CONTENU.test(f.filename); });
+      if (!fichiers.length) throw new Error('Cette modification ne concerne pas le contenu du site : elle ne peut pas être annulée ici.');
+      if (!c.parents || !c.parents.length) throw new Error('Aucune version antérieure disponible.');
+      var quand = new Date(c.commit.author.date).toLocaleString('fr-FR', { dateStyle: 'long', timeStyle: 'short' });
+      if (!window.confirm('Annuler « ' + quoi + ' » (' + quand + ') ?\n\nLe contenu concerné va être remis dans l’état qui précédait cette modification. Les modifications faites après, sur d’autres pages, sont conservées.\nLe site sera reconstruit en 1 à 2 minutes.')) { throw { annule: true }; }
+      bouton.textContent = 'Restauration…';
+      var parent = c.parents[0].sha;
+      // remise en état, fichier par fichier
+      return fichiers.reduce(function (chaine, f) {
+        return chaine.then(function () {
+          return Promise.all([
+            git(u, '/contents/' + f.filename + '?ref=' + parent),          // version d'avant
+            git(u, '/contents/' + f.filename + '?ref=main'),               // version actuelle (pour son sha)
+          ]).then(function (r) {
+            var avant = r[0], actuel = r[1];
+            var message = 'Admin : annulation de « ' + quoi + ' » (retour à la version précédente)';
+            if (!avant) {
+              if (!actuel) return null;                                     // déjà absent
+              return git(u, '/contents/' + f.filename, { method: 'DELETE', body: { message: message, sha: actuel.sha, branch: 'main' } });
+            }
+            if (actuel && actuel.sha === avant.sha) return null;            // déjà dans le bon état
+            var corps = { message: message, content: avant.content.replace(/\n/g, ''), branch: 'main' };
+            if (actuel) corps.sha = actuel.sha;
+            return git(u, '/contents/' + f.filename, { method: 'PUT', body: corps });
+          });
+        });
+      }, Promise.resolve());
+    }).then(function () {
+      toast('C’est annulé. Le site se met à jour dans 1 à 2 minutes.');
+      bouton.textContent = 'Annulé'; setTimeout(function () { chargerHistorique(u, false); }, 1500);
+    }).catch(function (e) {
+      if (!e || !e.annule) window.alert('Impossible d’annuler : ' + ((e && e.message) || 'erreur inconnue'));
+      bouton.disabled = false; bouton.textContent = 'Annuler cette modification';
+    });
+  }
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('button[data-revenir]'); if (!b) return;
+    var u = NI.currentUser(); if (!u) return;
+    revenir(u, b.dataset.revenir, b.dataset.quoi, b);
+  });
 
   // ---------- comptes ----------
   function appel(u, corps) {
@@ -379,7 +433,7 @@
         return '<div class="compte"><div><span class="nom">' + esc(c.nom || c.email) + '</span>' + libelleEtat(c) + '<div class="mail">' + esc(c.nom ? c.email : '') + (c.derniere_connexion ? (c.nom ? ' · ' : '') + 'dernière connexion le ' + new Date(c.derniere_connexion).toLocaleDateString('fr-FR') : '') + '</div></div><div class="boutons">' + boutons + '</div></div>';
       }).join('') : '<div class="vide">Aucun compte.</div>';
       // l'historique peut maintenant afficher les noms des comptes
-      if ($('liste-histo').children.length) chargerHistorique(u, false);
+      if (!$('liste-histo').hidden && $('liste-histo').children.length) chargerHistorique(u, false);
     }).catch(function (e) {
       $('liste-comptes').innerHTML = '<div class="vide">' + esc(e.message) + '</div>';
     });
