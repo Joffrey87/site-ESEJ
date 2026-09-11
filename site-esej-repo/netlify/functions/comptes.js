@@ -18,7 +18,7 @@ exports.handler = async (event, context) => {
   const identity = cc.identity;
   if (!appelant || !identity) return reply(401, { erreur: 'Connexion requise' });
 
-  const rolesAppelant = (appelant.app_metadata && appelant.app_metadata.roles) || [];
+  const rolesAppelant = ((appelant.app_metadata && appelant.app_metadata.roles) || []).map((r) => String(r).toLowerCase());
   if (!rolesAppelant.includes('maitre')) return reply(403, { erreur: 'Réservé au compte Maître (trésorier)' });
 
   let body = {};

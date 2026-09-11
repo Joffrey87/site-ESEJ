@@ -177,7 +177,7 @@
   var $ = function (id) { return document.getElementById(id); };
   if (NI && NI.setLocale) NI.setLocale('fr');
 
-  function roles(u) { return (u && u.app_metadata && u.app_metadata.roles) || []; }
+  function roles(u) { return ((u && u.app_metadata && u.app_metadata.roles) || []).map(function (r) { return String(r).toLowerCase(); }); }
   function estValide(u) { var r = roles(u); return r.indexOf('admin') >= 0 || r.indexOf('maitre') >= 0; }
   function estMaitre(u) { return roles(u).indexOf('maitre') >= 0; }
   function nom(u) { return (u && u.user_metadata && u.user_metadata.full_name) || (u && u.email) || ''; }
@@ -239,6 +239,7 @@
   }
   function chargerComptes(u) {
     appel(u, { action: 'lister' }).then(function (d) {
+      d.comptes.forEach(function (c) { c.roles = (c.roles || []).map(function (r) { return String(r).toLowerCase(); }); });
       var attente = d.comptes.filter(function (c) { return c.roles.indexOf('admin') < 0 && c.roles.indexOf('maitre') < 0; });
       $('comptes-alerte').hidden = attente.length === 0;
       $('comptes-alerte').textContent = attente.length === 1 ? '1 compte attend votre validation.' : attente.length + ' comptes attendent votre validation.';
