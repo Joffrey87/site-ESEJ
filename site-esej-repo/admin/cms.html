@@ -16,12 +16,16 @@
   <script>
     // Garde-fou : l'éditeur n'est accessible qu'aux comptes validés (rôles admin ou maitre).
     (function () {
-      if (window.netlifyIdentity && netlifyIdentity.setLocale) netlifyIdentity.setLocale('fr');
-      var u = window.netlifyIdentity && netlifyIdentity.currentUser();
-      var roles = ((u && u.app_metadata && u.app_metadata.roles) || []).map(function (r) { return String(r).toLowerCase(); });
-      var ok = roles.indexOf('admin') >= 0 || roles.indexOf('maitre') >= 0;
-      if (!u || !ok) { location.replace('./' + (u ? '#attente' : '')); return; }
-      if (window.netlifyIdentity) netlifyIdentity.on('logout', function () { location.replace('./'); });
+      if (!window.netlifyIdentity) return;
+      if (netlifyIdentity.setLocale) netlifyIdentity.setLocale('fr');
+      function verifier(u) {
+        var roles = ((u && u.app_metadata && u.app_metadata.roles) || []).map(function (r) { return String(r).toLowerCase(); });
+        var ok = roles.indexOf('admin') >= 0 || roles.indexOf('maitre') >= 0;
+        if (!u || !ok) location.replace('./' + (u ? '#attente' : ''));
+      }
+      // L'utilisateur courant n'est connu qu'après l'initialisation du widget
+      netlifyIdentity.on('init', verifier);
+      netlifyIdentity.on('logout', function () { location.replace('./'); });
     })();
   </script>
   <!-- Decap CMS -->
