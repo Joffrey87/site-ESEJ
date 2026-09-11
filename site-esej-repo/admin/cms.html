@@ -47,36 +47,33 @@
     // pour tenir dans son volet : ce qu'on voit est exactement la page en plein écran, en plus petit.
     (function () {
       var LARGEUR_PAGE = Math.max(1200, window.innerWidth);
+      var derniereSignature = '';
       function ajuster() {
         var fr = document.querySelector('.Pane2 iframe');
         var volet = fr && fr.closest('.Pane2');
-        if (!fr || !volet) return;
-        // le volet ne doit jamais s'étirer pour suivre l'iframe agrandie
-        volet.style.minWidth = '0'; volet.style.overflow = 'hidden';
-        var conteneur = fr.parentElement;
-        conteneur.style.overflow = 'hidden'; conteneur.style.width = '100%'; conteneur.style.position = 'relative';
+        if (!fr || !volet) { derniereSignature = ''; return; }
         var r = volet.getBoundingClientRect();
         if (r.width < 50 || r.height < 50) return;
+        var conteneur = fr.parentElement;
+        var signature = [Math.round(r.width), Math.round(r.height), fr === ajuster.dernierCadre].join('x');
+        if (signature === derniereSignature) return;           // rien n'a bougé : on ne touche à rien
+        derniereSignature = signature; ajuster.dernierCadre = fr;
         var k = r.width / LARGEUR_PAGE;
+        volet.style.minWidth = '0'; volet.style.overflow = 'hidden';
+        conteneur.style.overflow = 'hidden'; conteneur.style.position = 'relative'; conteneur.style.width = '100%'; conteneur.style.height = '100%';
         fr.style.position = 'absolute'; fr.style.left = '0'; fr.style.top = '0';
         fr.style.width = LARGEUR_PAGE + 'px';
-        fr.style.height = Math.round(conteneur.getBoundingClientRect().height / k) + 'px';
+        fr.style.height = Math.round(r.height / k) + 'px';
         fr.style.transform = 'scale(' + k + ')';
         fr.style.transformOrigin = '0 0';
         fr.style.maxWidth = 'none';
-        // si un ancêtre a défilé horizontalement (focus dans l'aperçu), on le remet en place
-        var sp = document.querySelector('.SplitPane'); if (sp && sp.scrollLeft) sp.scrollLeft = 0;
       }
-      var obs = new ResizeObserver(ajuster);
-      var branche = null;
-      new MutationObserver(function () {
-        var fr = document.querySelector('.Pane2 iframe');
-        var volet = fr && fr.closest('.Pane2');
-        if (volet && volet !== branche) { branche = volet; obs.observe(volet); ajuster(); }
-      }).observe(document.documentElement, { childList: true, subtree: true });
-      window.addEventListener('resize', ajuster);
-      document.addEventListener('scroll', function (e) { if (e.target && e.target.classList && e.target.classList.contains('SplitPane') && e.target.scrollLeft) e.target.scrollLeft = 0; }, true);
-      ajuster();
+      // vérification périodique (légère) plutôt qu'observateurs : aucun risque de boucle
+      setInterval(function () {
+        ajuster();
+        var sp = document.querySelector('.SplitPane'); if (sp && sp.scrollLeft > 0) sp.scrollLeft = 0;
+      }, 400);
+      window.addEventListener('resize', function () { derniereSignature = ''; ajuster(); });
     })();
   </script>
   <a id="esej-retour" href="./">← Tableau de bord</a>
