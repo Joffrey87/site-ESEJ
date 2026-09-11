@@ -348,49 +348,72 @@
   // ---------- revenir sur une modification (restauration du contenu d'avant) ----------
   var CONTENU = /^site-esej-repo\/(content|wp-content\/uploads)\//;
   function git(u, chemin, options) {
+    var o = options || {};
+    var sep = chemin.indexOf('?') >= 0 ? '&' : '?';
+    var url = '/.netlify/git/github' + chemin + (o.method ? '' : sep + '_=' + Date.now()); // lectures non mises en cache
     return u.jwt().then(function (jeton) {
-      var o = options || {};
-      return fetch('/.netlify/git/github' + chemin, { method: o.method || 'GET', headers: { Authorization: 'Bearer ' + jeton, 'Content-Type': 'application/json' }, body: o.body ? JSON.stringify(o.body) : undefined });
+      return fetch(url, { method: o.method || 'GET', headers: { Authorization: 'Bearer ' + jeton, 'Content-Type': 'application/json' }, body: o.body ? JSON.stringify(o.body) : undefined });
     }).then(function (r) {
       if (r.status === 404) return null;
-      return r.json().then(function (j) { if (!r.ok) throw new Error((j && (j.message || j.msg)) || ('Erreur ' + r.status)); return j; });
+      return r.json().then(function (j) {
+        if (!r.ok) { var e = new Error((j && (j.message || j.msg)) || ('Erreur ' + r.status)); e.statut = r.status; throw e; }
+        return j;
+      });
     });
   }
+  var contenuDe = function (f) { return f && f.content ? f.content.replace(/\s/g, '') : null; };
+
+  // Écrit (ou supprime) un fichier, avec une seconde tentative si l'état connu du dépôt a changé entre-temps
+  function ecrireFichier(u, chemin, contenu, message, essai) {
+    return git(u, '/contents/' + chemin).then(function (actuel) {
+      if (contenu === null) {
+        if (!actuel) return null;                                   // déjà supprimé
+        return git(u, '/contents/' + chemin, { method: 'DELETE', body: { message: message, sha: actuel.sha, branch: 'main' } });
+      }
+      if (actuel && contenuDe(actuel) === contenu) return null;     // déjà dans l'état voulu
+      var corps = { message: message, content: contenu, branch: 'main' };
+      if (actuel) corps.sha = actuel.sha;
+      return git(u, '/contents/' + chemin, { method: 'PUT', body: corps });
+    }).catch(function (e) {
+      // 409/422 : le dépôt a bougé entre la lecture et l'écriture — on relit et on réessaie une fois
+      if ((essai || 0) < 2 && (e.statut === 409 || e.statut === 422)) {
+        return new Promise(function (r) { setTimeout(r, 1200); }).then(function () { return ecrireFichier(u, chemin, contenu, message, (essai || 0) + 1); });
+      }
+      throw e;
+    });
+  }
+
   function revenir(u, sha, quoi, bouton) {
     bouton.disabled = true; bouton.textContent = 'Vérification…';
-    var detail;
     git(u, '/commits/' + sha).then(function (c) {
-      detail = c;
       var fichiers = (c.files || []).filter(function (f) { return CONTENU.test(f.filename); });
       if (!fichiers.length) throw new Error('Cette modification ne concerne pas le contenu du site : elle ne peut pas être annulée ici.');
       if (!c.parents || !c.parents.length) throw new Error('Aucune version antérieure disponible.');
-      var quand = new Date(c.commit.author.date).toLocaleString('fr-FR', { dateStyle: 'long', timeStyle: 'short' });
-      if (!window.confirm('Annuler « ' + quoi + ' » (' + quand + ') ?\n\nLe contenu concerné va être remis dans l’état qui précédait cette modification. Les modifications faites après, sur d’autres pages, sont conservées.\nLe site sera reconstruit en 1 à 2 minutes.')) { throw { annule: true }; }
-      bouton.textContent = 'Restauration…';
       var parent = c.parents[0].sha;
-      // remise en état, fichier par fichier
+      var quand = new Date(c.commit.author.date).toLocaleString('fr-FR', { dateStyle: 'long', timeStyle: 'short' });
+      if (!window.confirm('Annuler « ' + quoi + ' » (' + quand + ') ?\n\nLe contenu concerné va être remis dans l’état qui précédait cette modification. Les modifications faites après, sur d’autres pages, sont conservées.\nLe site sera reconstruit en 1 à 2 minutes.')) throw { annule: true };
+      bouton.textContent = 'Restauration…';
+      var message = 'Admin : annulation de « ' + quoi + ' » (retour à la version précédente)';
       return fichiers.reduce(function (chaine, f) {
         return chaine.then(function () {
           return Promise.all([
-            git(u, '/contents/' + f.filename + '?ref=' + parent),          // version d'avant
-            git(u, '/contents/' + f.filename + '?ref=main'),               // version actuelle (pour son sha)
+            git(u, '/contents/' + f.filename + '?ref=' + parent),   // version d'avant
+            git(u, '/contents/' + f.filename + '?ref=' + sha),      // version issue de cette modification
           ]).then(function (r) {
-            var avant = r[0], actuel = r[1];
-            var message = 'Admin : annulation de « ' + quoi + ' » (retour à la version précédente)';
-            if (!avant) {
-              if (!actuel) return null;                                     // déjà absent
-              return git(u, '/contents/' + f.filename, { method: 'DELETE', body: { message: message, sha: actuel.sha, branch: 'main' } });
-            }
-            if (actuel && actuel.sha === avant.sha) return null;            // déjà dans le bon état
-            var corps = { message: message, content: avant.content.replace(/\n/g, ''), branch: 'main' };
-            if (actuel) corps.sha = actuel.sha;
-            return git(u, '/contents/' + f.filename, { method: 'PUT', body: corps });
+            var avant = r[0], pendant = r[1];
+            if (contenuDe(avant) === contenuDe(pendant)) return null;   // ce fichier n'a pas réellement changé
+            return ecrireFichier(u, f.filename, contenuDe(avant), message).then(function () {
+              // vérification : le dépôt contient bien la version restaurée
+              return git(u, '/contents/' + f.filename).then(function (apres) {
+                if (contenuDe(apres) !== contenuDe(avant)) throw new Error('la restauration de ' + f.filename.split('/').pop() + ' n’a pas été prise en compte');
+              });
+            });
           });
         });
       }, Promise.resolve());
     }).then(function () {
       toast('C’est annulé. Le site se met à jour dans 1 à 2 minutes.');
-      bouton.textContent = 'Annulé'; setTimeout(function () { chargerHistorique(u, false); }, 1500);
+      bouton.textContent = 'Annulé'; setTimeout(function () { chargerHistorique(u, false); }, 3000);
     }).catch(function (e) {
       if (!e || !e.annule) window.alert('Impossible d’annuler : ' + ((e && e.message) || 'erreur inconnue'));
       bouton.disabled = false; bouton.textContent = 'Annuler cette modification';
