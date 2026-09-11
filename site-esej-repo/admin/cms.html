@@ -29,18 +29,47 @@
     })();
   </script>
   <script>
-    // Partage de l'écran à l'ouverture : 40 % pour le formulaire (gauche), 60 % pour l'aperçu (droite).
+    // Partage de l'écran à l'ouverture : 30 % pour le formulaire (gauche), 70 % pour l'aperçu (droite).
     // La poignée centrale reste utilisable pour ajuster ponctuellement.
     try {
-      localStorage.setItem('cms.split-pane-position', String(Math.round(window.innerWidth * 0.4)));
+      localStorage.setItem('cms.split-pane-position', String(Math.round(window.innerWidth * 0.3)));
       localStorage.setItem('cms.preview-visible', 'true');
     } catch (e) { /* stockage indisponible : partage par défaut */ }
   </script>
-  <!-- Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@^3.3.3/dist/decap-cms.js"></script>
+  <!-- Decap CMS (version figée : l'aperçu modifiable s'appuie sur sa structure interne) -->
+  <script src="https://unpkg.com/decap-cms@3.16.2/dist/decap-cms.js"></script>
   <!-- Aperçu en direct : rendu de la page avec les gabarits et le style du site -->
   <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/turndown@7.2.0/dist/turndown.js"></script>
   <script src="apercu.js"></script>
+  <script>
+    // L'aperçu est rendu à la largeur d'une fenêtre de navigateur complète, puis réduit à l'échelle
+    // pour tenir dans son volet : ce qu'on voit est exactement la page en plein écran, en plus petit.
+    (function () {
+      var LARGEUR_PAGE = Math.max(1200, window.innerWidth);
+      function ajuster() {
+        var fr = document.querySelector('.Pane2 iframe, .Pane.vertical + .Pane iframe');
+        if (!fr || !fr.parentElement) return;
+        var conteneur = fr.parentElement, r = conteneur.getBoundingClientRect();
+        if (r.width < 50 || r.height < 50) return;
+        var k = r.width / LARGEUR_PAGE;
+        conteneur.style.overflow = 'hidden';
+        fr.style.width = LARGEUR_PAGE + 'px';
+        fr.style.height = Math.round(r.height / k) + 'px';
+        fr.style.transform = 'scale(' + k + ')';
+        fr.style.transformOrigin = '0 0';
+        fr.style.maxWidth = 'none';
+      }
+      var obs = new ResizeObserver(ajuster);
+      var branche = null;
+      new MutationObserver(function () {
+        var fr = document.querySelector('.Pane2 iframe');
+        if (fr && fr.parentElement !== branche) { branche = fr.parentElement; obs.observe(branche); ajuster(); }
+      }).observe(document.documentElement, { childList: true, subtree: true });
+      window.addEventListener('resize', ajuster);
+      ajuster();
+    })();
+  </script>
   <a id="esej-retour" href="./">← Tableau de bord</a>
   <script>
     // Navigation : l'éditeur ne sert qu'à modifier une page ou un réglage. Ses écrans de liste
