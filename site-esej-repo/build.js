@@ -103,7 +103,8 @@ function renderPage(p) {
       return fill(B.page_contact, { ...site, ...p, carte_url, contact_texte: md(p.contact_texte) });
     }
     case 'don':
-      return fill(B.page_don, { ...site, ...p, contact_texte: md(p.contact_texte) });
+      // HelloAsso ignore ?lang=fr : la langue du widget suit le navigateur du visiteur (ou le cookie i18n_redirected de helloasso.com)
+      return fill(B.page_don, { ...site, ...p, helloasso_url_fr: site.helloasso_url, contact_texte: md(p.contact_texte) });
     default: {
       let html = titrePage(p);
       for (const b of p.blocs || []) html += '\n' + renderBlock(b);
