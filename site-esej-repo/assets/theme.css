@@ -1637,7 +1637,7 @@ html:not(.et_fb_edit_enabled) #et-fb-app .et_pb_fullwidth_map_0:hover .gm-style>
 #main-footer #footer-info,#main-footer #footer-info a{color:#fff!important}
 /* Icônes SVG (remplacent la police FontAwesome absente du dépôt) */
 .esej-icone-wrap{display:inline-block;line-height:0}
-.esej-icone{display:inline-block;width:60px;height:60px;vertical-align:middle}
+.esej-icone{display:block;width:60px;height:60px;margin:0 auto;flex:none;shape-rendering:geometricPrecision;overflow:visible}
 .esej-accueil-blurb0 .esej-icone,.esej-accueil-blurb1 .esej-icone,.esej-accueil-blurb2 .esej-icone{color:#021d51}
 .esej-contact-icon0 .esej-icone{color:#e5ae47}
 @media (max-width:767px){.esej-icone{width:50px;height:50px}}
