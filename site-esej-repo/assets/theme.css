@@ -1649,3 +1649,8 @@ html:not(.et_fb_edit_enabled) #et-fb-app .et_pb_fullwidth_map_0:hover .gm-style>
 /* Page de don : titres en Open Sans comme l'original */
 .esej-don-text0 h2,.esej-don-text0 h1{font-family:'Open Sans',Arial,sans-serif!important}
 #haWidget{max-width:100%}
+/* Pied de page centré (liens + copyright), ordinateur et mobile */
+#main-footer .container,#main-footer #et-footer-nav .container,#main-footer #footer-bottom .container{text-align:center!important}
+#main-footer .bottom-nav{display:flex;flex-wrap:wrap;justify-content:center;padding:0;margin:0 auto;float:none!important;text-align:center}
+#main-footer .bottom-nav li{float:none!important;display:inline-block}
+#main-footer #footer-info{float:none!important;text-align:center!important;width:100%}
