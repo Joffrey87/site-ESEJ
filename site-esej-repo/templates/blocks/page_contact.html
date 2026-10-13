@@ -10,7 +10,7 @@
 <div class="et_pb_row esej-contact-row1 et_animated">
 <div class="et_pb_column et_pb_column_4_4 esej-contact-column1 et_pb_css_mix_blend_mode_passthrough et-last-child">
 <div class="et_pb_module et_pb_icon esej-contact-icon0">
-<span class="et_pb_icon_wrap"><span class="et-pb-icon"></span></span>
+<span class="et_pb_icon_wrap esej-icone-wrap"><svg class="esej-icone" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="60" height="60" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></span>
 </div><div class="et_pb_module et_pb_text esej-contact-text1 et_animated et_pb_text_align_center et_pb_bg_layout_light">
 <div class="et_pb_text_inner"><h4>{{adresse_nom}}</h4>
 <p>{{adresse_rue}}<br/>{{adresse_ville}}</p>
@@ -19,7 +19,10 @@
 </div>
 </div>
 </div>
-</div><div class="et_pb_section esej-contact-section2 et_pb_fullwidth_section et_section_regular"><div class="et_pb_module et_pb_map_container esej-carte"><iframe loading="lazy" src="{{carte_url}}" style="width:100%;height:440px;border:0;display:block;filter:saturate(30%)" title="Plan d'accès"></iframe></div></div><div class="et_pb_section esej-contact-section4 et_animated et_pb_with_background et_section_regular">
+</div><div class="et_pb_section esej-contact-section2 et_pb_fullwidth_section et_section_regular"><div class="et_pb_module et_pb_map_container esej-carte"><div id="esej-carte" role="region" aria-label="Plan d'accès" data-lat="{{carte_lat}}" data-lng="{{carte_lng}}" data-zoom="{{carte_zoom}}"></div><noscript><a href="https://www.openstreetmap.org/?mlat={{carte_lat}}&amp;mlon={{carte_lng}}#map=17/{{carte_lat}}/{{carte_lng}}">Voir le plan sur OpenStreetMap</a></noscript></div></div>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>(function(){var el=document.getElementById('esej-carte');if(!el||!window.L)return;var lat=parseFloat(el.dataset.lat)||49.2707227,lng=parseFloat(el.dataset.lng)||4.007147,z=parseInt(el.dataset.zoom,10)||17;var map=L.map(el,{scrollWheelZoom:false,dragging:!L.Browser.mobile,tap:false}).setView([lat,lng],z);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);L.marker([lat,lng],{icon:L.divIcon({className:'esej-carte-pin',html:'<svg viewBox="0 0 24 24" width="36" height="36" aria-hidden="true"><path fill="#021d51" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>',iconSize:[36,36],iconAnchor:[18,34]})}).addTo(map);function fix(){map.invalidateSize();map.setView([lat,lng],z,{animate:false});}window.addEventListener('load',fix);window.addEventListener('resize',fix);setTimeout(fix,300);})();</script><div class="et_pb_section esej-contact-section4 et_animated et_pb_with_background et_section_regular">
 <div class="et_pb_row esej-contact-row2 et_animated">
 <div class="et_pb_column et_pb_column_4_4 esej-contact-column2 et_pb_css_mix_blend_mode_passthrough et-last-child">
 <div class="et_pb_module et_pb_text esej-contact-text2 et_animated et_pb_text_align_center et_pb_bg_layout_light">
